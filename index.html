@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SOS VENEZUELA: plataforma informativa de emergencia de la Red de Migración Unidos en Brasil." />
+  <title>SOS VENEZUELA</title>
+  <style>
+    :root {
+      --red: #d71920;
+      --blue: #0033a0;
+      --yellow: #ffd100;
+      --white: #ffffff;
+      --ink: #172033;
+      --muted: #5d667a;
+      --soft: #f5f7fb;
+      --shadow: 0 18px 45px rgba(23, 32, 51, 0.12);
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(255, 209, 0, 0.18), transparent 34rem),
+        radial-gradient(circle at top right, rgba(0, 51, 160, 0.13), transparent 30rem),
+        linear-gradient(180deg, #ffffff 0%, #f7f9fd 100%);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .top-stripe {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      height: 8px;
+    }
+
+    .top-stripe span:nth-child(1) { background: var(--yellow); }
+    .top-stripe span:nth-child(2) { background: var(--blue); }
+    .top-stripe span:nth-child(3) { background: var(--red); }
+
+    .container {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 28px 0 54px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+      align-items: center;
+      padding: 34px;
+      border: 1px solid rgba(0, 51, 160, 0.08);
+      border-radius: calc(var(--radius) + 10px);
+      background: rgba(255, 255, 255, 0.82);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -90px;
+      bottom: -130px;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(255, 209, 0, 0.48), rgba(215, 25, 32, 0.20));
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 22px;
+    }
+
+    .brand {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .brand img {
+      width: 92px;
+      height: 92px;
+      object-fit: contain;
+      border-radius: 20px;
+      background: var(--white);
+      box-shadow: 0 12px 30px rgba(0, 51, 160, 0.16);
+      padding: 8px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      color: var(--blue);
+      background: rgba(0, 51, 160, 0.08);
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+
+    h1 {
+      color: var(--blue);
+      font-size: clamp(2.35rem, 7vw, 5.4rem);
+      line-height: 0.95;
+      letter-spacing: -0.08em;
+      text-transform: uppercase;
+    }
+
+    .subtitle {
+      color: var(--red);
+      font-size: clamp(1.15rem, 2.8vw, 1.7rem);
+      font-weight: 800;
+    }
+
+    .lead {
+      max-width: 850px;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .language-switcher {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .lang-btn,
+    .btn {
+      border: 0;
+      cursor: pointer;
+      border-radius: 999px;
+      font-weight: 800;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .lang-btn {
+      padding: 11px 16px;
+      color: var(--blue);
+      background: var(--white);
+      border: 2px solid rgba(0, 51, 160, 0.13);
+    }
+
+    .lang-btn.active,
+    .lang-btn:hover,
+    .lang-btn:focus-visible {
+      color: var(--white);
+      background: var(--blue);
+      box-shadow: 0 10px 24px rgba(0, 51, 160, 0.22);
+      outline: none;
+      transform: translateY(-2px);
+    }
+
+    main {
+      display: grid;
+      gap: 28px;
+      padding-bottom: 46px;
+    }
+
+    section {
+      padding: 34px;
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 12px 34px rgba(23, 32, 51, 0.08);
+      border: 1px solid rgba(0, 51, 160, 0.07);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+      color: var(--blue);
+      font-size: clamp(1.45rem, 3vw, 2.1rem);
+      letter-spacing: -0.03em;
+    }
+
+    .section-text {
+      color: var(--muted);
+      max-width: 890px;
+      font-size: 1.02rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-height: 100%;
+      padding: 22px;
+      border-radius: 18px;
+      background: var(--white);
+      box-shadow: 0 14px 32px rgba(23, 32, 51, 0.08);
+      border: 1px solid rgba(0, 51, 160, 0.08);
+    }
+
+    .icon {
+      display: inline-grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 15px;
+      font-size: 1.45rem;
+      background: linear-gradient(135deg, rgba(255, 209, 0, 0.45), rgba(215, 25, 32, 0.14));
+    }
+
+    .card h3 {
+      color: var(--ink);
+      font-size: 1.12rem;
+      line-height: 1.25;
+    }
+
+    .card p {
+      color: var(--muted);
+      flex: 1;
+    }
+
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 9px;
+      width: fit-content;
+      margin-top: 8px;
+      padding: 12px 18px;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--red), #a90e18);
+      box-shadow: 0 14px 28px rgba(215, 25, 32, 0.24);
+    }
+
+    .btn.secondary {
+      background: linear-gradient(135deg, var(--blue), #001f6b);
+      box-shadow: 0 14px 28px rgba(0, 51, 160, 0.22);
+    }
+
+    .btn:hover,
+    .btn:focus-visible {
+      transform: translateY(-2px);
+      outline: none;
+      filter: saturate(1.08);
+    }
+
+    .map-frame {
+      width: 100%;
+      min-height: 420px;
+      margin-top: 24px;
+      border: 0;
+      border-radius: 18px;
+      box-shadow: inset 0 0 0 1px rgba(0, 51, 160, 0.08), 0 14px 32px rgba(23, 32, 51, 0.08);
+      background: var(--soft);
+    }
+
+    footer {
+      color: var(--white);
+      background: linear-gradient(135deg, var(--blue), #00184f 62%, #111827);
+      padding: 32px 0;
+    }
+
+    .footer-inner {
+      display: grid;
+      gap: 8px;
+      text-align: center;
+    }
+
+    .footer-inner strong {
+      color: var(--yellow);
+      font-size: 1.05rem;
+    }
+
+
+
+    .service-hub {
+      display: grid;
+      gap: 22px;
+      margin-top: 24px;
+    }
+
+    .quick-access {
+      padding: 22px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(0, 51, 160, 0.10), rgba(255, 209, 0, 0.16));
+      border: 1px solid rgba(0, 51, 160, 0.10);
+    }
+
+    .quick-access h3,
+    .service-controls label {
+      color: var(--blue);
+      font-size: 1.05rem;
+      margin-bottom: 12px;
+    }
+
+    .quick-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .quick-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: var(--white);
+      background: var(--blue);
+      font-weight: 800;
+      box-shadow: 0 10px 22px rgba(0, 51, 160, 0.18);
+    }
+
+    .service-controls {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 16px;
+      align-items: end;
+      padding: 20px;
+      border-radius: 20px;
+      background: var(--soft);
+      border: 1px solid rgba(0, 51, 160, 0.08);
+    }
+
+    .control-group {
+      display: grid;
+      gap: 8px;
+    }
+
+    .service-controls input,
+    .service-controls select {
+      width: 100%;
+      min-height: 52px;
+      padding: 12px 15px;
+      border: 2px solid rgba(0, 51, 160, 0.14);
+      border-radius: 15px;
+      background: var(--white);
+      color: var(--ink);
+      font: inherit;
+      outline: none;
+    }
+
+    .service-controls input:focus,
+    .service-controls select:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 4px rgba(0, 51, 160, 0.10);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .service-card {
+      position: relative;
+      overflow: hidden;
+      border-top: 7px solid var(--category-color, var(--blue));
+    }
+
+    .service-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .category-pill,
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 900;
+    }
+
+    .category-pill {
+      color: var(--category-color, var(--blue));
+      background: color-mix(in srgb, var(--category-color, var(--blue)) 13%, white);
+    }
+
+    .status-pill {
+      color: #146c2e;
+      background: #e6f7ec;
+    }
+
+    .status-pill.pending {
+      color: #8a5a00;
+      background: #fff4cf;
+    }
+
+    .btn.disabled,
+    .btn[aria-disabled="true"] {
+      pointer-events: none;
+      cursor: not-allowed;
+      color: #6b7280;
+      background: #e5e7eb;
+      box-shadow: none;
+    }
+
+    .no-results {
+      display: none;
+      padding: 22px;
+      border-radius: 18px;
+      text-align: center;
+      color: var(--muted);
+      background: #fff7d6;
+      border: 1px solid rgba(255, 209, 0, 0.55);
+      font-weight: 800;
+    }
+
+    .no-results.show {
+      display: block;
+    }
+
+
+    @media (max-width: 980px) {
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 860px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 620px) {
+      .container {
+        width: min(100% - 22px, 1120px);
+      }
+
+      header {
+        padding: 18px 0 28px;
+      }
+
+      .hero,
+      section {
+        padding: 22px;
+      }
+
+      .brand {
+        align-items: flex-start;
+      }
+
+      .brand img {
+        width: 76px;
+        height: 76px;
+      }
+
+      .grid,
+      .services-grid,
+      .service-controls {
+        grid-template-columns: 1fr;
+      }
+
+      .quick-link {
+        width: 100%;
+      }
+
+      .hero-actions,
+      .language-switcher,
+      .btn {
+        width: 100%;
+      }
+
+      .lang-btn {
+        flex: 1 1 30%;
+      }
+
+      .map-frame {
+        min-height: 320px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-stripe" aria-hidden="true"><span></span><span></span><span></span></div>
+
+  <header class="container">
+    <div class="hero">
+      <div class="hero-content">
+        <div class="brand">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh6cZ5UCnCpJlwQ2RraHU91qBrE_eoKkHaPIcQt3M56lL-JGVnEEtiXvckDcv9GmUTJl9doZOstlk6enI5KbAcHK9bFDzi_uQUkemogvLnZ4I5Ho5ZLnGgDFzoNk7GZdMA4xS77qYH8-lno2I0JpsqmX1AJVJcFSJnGwDefXeK8Hf_eceP_42tCwnNJeGc/s320/Confer%C3%AAncia%20Livre%20Nacional%20%282%29.png" alt="Red de Migración Unidos en Brasil" />
+          <div>
+            <span class="eyebrow" data-i18n="identity">Iniciativa de la Red de Migración Unidos en Brasil</span>
+            <h1>SOS VENEZUELA</h1>
+          </div>
+        </div>
+        <p class="subtitle" data-i18n="subtitle">Plataforma informativa de emergencia</p>
+        <p class="lead" data-i18n="heroLead">Facilitamos el acceso a información para personas, familias, organizaciones e instituciones que desean apoyar la situación en Venezuela causada por el terremoto.</p>
+        <div class="hero-actions">
+          <nav class="language-switcher" aria-label="Language selector">
+            <button class="lang-btn active" type="button" data-lang="es">Español</button>
+            <button class="lang-btn" type="button" data-lang="en">English</button>
+            <button class="lang-btn" type="button" data-lang="pt">Português</button>
+          </nav>
+          <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSfQLsFPPGsuOTpJ_kpRhlbmuujDx8Omr3JznRIzXyCOKJhORA/viewform" target="_blank" rel="noopener noreferrer" data-i18n="registerInitiativeCta">Registrar iniciativa</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="objective">
+      <h2 class="section-title"><span>🎯</span><span data-i18n="objectiveTitle">Objetivo</span></h2>
+      <p class="section-text" data-i18n="objectiveText">Esta plataforma reúne información general, guías, mapas, formularios y canales de apoyo relacionados con la emergencia causada por el terremoto en Venezuela.</p>
+    </section>
+
+    <section id="general-info">
+      <h2 class="section-title"><span>ℹ️</span><span data-i18n="generalTitle">Informaciones Generales</span></h2>
+      <p class="section-text" data-i18n="generalIntro">Encuentra recursos esenciales para orientar acciones de solidaridad, comunicación y respuesta humanitaria.</p>
+      <div class="grid" id="infoCards"></div>
+    </section>
+
+
+
+    <section id="service-hub">
+      <h2 class="section-title"><span>🧭</span><span data-i18n="serviceHubTitle">Central de Servicios de Emergencia</span></h2>
+      <p class="section-text" data-i18n="serviceHubText">Ante la emergencia causada por el terremoto en Venezuela, esta central reúne plataformas ciudadanas, organizaciones e iniciativas digitales para facilitar el acceso a información, reportes, donaciones, búsqueda de personas, apoyo médico, refugios, logística y ayuda humanitaria.</p>
+
+      <div class="service-hub">
+        <div class="quick-access">
+          <h3 data-i18n="quickAccessTitle">Accesos rápidos</h3>
+          <div class="quick-links" id="quickLinks"></div>
+        </div>
+
+        <div class="service-controls" aria-label="Filtros de servicios de emergencia">
+          <div class="control-group">
+            <label for="serviceSearch" data-i18n="searchLabel">Buscar por palabra clave</label>
+            <input id="serviceSearch" type="search" data-i18n-placeholder="searchPlaceholder" placeholder="Buscar plataforma, categoría o descripción" />
+          </div>
+          <div class="control-group">
+            <label for="categoryFilter" data-i18n="categoryLabel">Filtrar por categoría</label>
+            <select id="categoryFilter"></select>
+          </div>
+        </div>
+
+        <div class="services-grid" id="serviceCards"></div>
+        <p class="no-results" id="noServiceResults" data-i18n="noResults">No se encontraron resultados para la búsqueda o categoría seleccionada.</p>
+      </div>
+    </section>
+
+
+    <section id="guides">
+      <h2 class="section-title"><span>📘</span><span data-i18n="guidesTitle">Guías y Manuales</span></h2>
+      <div class="grid">
+        <article class="card">
+          <span class="icon">🛡️</span>
+          <h3 data-i18n="manualTitle">Manual de Autoprotección de FUNVISIS</h3>
+          <p data-i18n="manualText">Material de referencia para medidas de autoprotección antes, durante y después de eventos sísmicos.</p>
+          <a class="btn" href="https://drive.google.com/file/d/1DjAg2XtNgHxXLHj2ejj_-x6Er3V-bYzA/view?usp=drive_link" target="_blank" rel="noopener noreferrer" data-i18n="openManual">Abrir manual</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="interactive-map">
+      <h2 class="section-title"><span>🗺️</span><span data-i18n="mapTitle">Mapa Interactivo</span></h2>
+      <p class="section-text" data-i18n="mapText">Consulta el mapa interactivo con información geográfica de apoyo y monitoreo. Si el mapa no carga en esta página, usa el botón de acceso directo.</p>
+      <iframe class="map-frame" title="Mapa Interactivo SOS Venezuela" src="https://www.google.com/maps/d/u/0/embed?mid=1zSmCH4fBRvda4f7R6D-mgil232eOwDU&ehbc=2E312F&ll=-10.492026162308692%2C-50.5190295&z=4" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <a class="btn secondary" href="https://www.google.com/maps/d/u/0/edit?hl=pt-BR&mid=1zSmCH4fBRvda4f7R6D-mgil232eOwDU&ll=-10.492026162308692%2C-50.5190295&z=4" target="_blank" rel="noopener noreferrer" data-i18n="openMap">Abrir mapa interactivo</a>
+    </section>
+
+    <section id="platforms">
+      <h2 class="section-title"><span>🤝</span><span data-i18n="platformsTitle">Plataformas incorporadas</span></h2>
+      <p class="section-text" data-i18n="platformsIntro">Accede a plataformas externas para reportes, mapas y registros de información de emergencia.</p>
+      <div class="grid" id="platformCards"></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <strong data-i18n="footerMain">SOS VENEZUELA — Iniciativa de la Red de Migración Unidos en Brasil.</strong>
+      <span data-i18n="footerSub">Información, solidaridad y apoyo humanitario.</span>
+    </div>
+  </footer>
+
+  <script>
+    // Text content for all supported languages. Spanish is the default language.
+    const translations = {
+      es: {
+        htmlLang: "es",
+        pageTitle: "SOS VENEZUELA",
+        identity: "Iniciativa de la Red de Migración Unidos en Brasil",
+        subtitle: "Plataforma informativa de emergencia",
+        heroLead: "Facilitamos el acceso a información para personas, familias, organizaciones e instituciones que desean apoyar la situación en Venezuela causada por el terremoto.",
+        objectiveTitle: "Objetivo",
+        objectiveText: "Esta plataforma reúne información general, guías, mapas, formularios y canales de apoyo relacionados con la emergencia causada por el terremoto en Venezuela.",
+        generalTitle: "Informaciones Generales",
+        generalIntro: "Encuentra recursos esenciales para orientar acciones de solidaridad, comunicación y respuesta humanitaria.",
+        serviceHubTitle: "Central de Servicios de Emergencia",
+        serviceHubText: "Ante la emergencia causada por el terremoto en Venezuela, esta central reúne plataformas ciudadanas, organizaciones e iniciativas digitales para facilitar el acceso a información, reportes, donaciones, búsqueda de personas, apoyo médico, refugios, logística y ayuda humanitaria.",
+        quickAccessTitle: "Accesos rápidos",
+        registerInitiativeCta: "Registrar iniciativa",
+        searchLabel: "Buscar por palabra clave",
+        searchPlaceholder: "Buscar plataforma, categoría o descripción",
+        categoryLabel: "Filtrar por categoría",
+        allCategories: "Todas las categorías",
+        accessService: "Acceder",
+        activeStatus: "Activo",
+        pendingStatus: "URL pendiente",
+        noResults: "No se encontraron resultados para la búsqueda o categoría seleccionada.",
+        guidesTitle: "Guías y Manuales",
+        manualTitle: "Manual de Autoprotección de FUNVISIS",
+        manualText: "Material de referencia para medidas de autoprotección antes, durante y después de eventos sísmicos.",
+        openManual: "Abrir manual",
+        mapTitle: "Mapa Interactivo",
+        mapText: "Consulta el mapa interactivo con información geográfica de apoyo y monitoreo. Si el mapa no carga en esta página, usa el botón de acceso directo.",
+        openMap: "Abrir mapa interactivo",
+        platformsTitle: "Plataformas incorporadas",
+        platformsIntro: "Accede a plataformas externas para reportes, mapas y registros de información de emergencia.",
+        openPlatform: "Abrir plataforma",
+        footerMain: "SOS VENEZUELA — Iniciativa de la Red de Migración Unidos en Brasil.",
+        footerSub: "Información, solidaridad y apoyo humanitario.",
+        infoCards: [
+          { icon: "🚨", title: "Emergencia y apoyo humanitario", text: "Información para coordinar donaciones, voluntariado, asistencia básica y acciones solidarias." },
+          { icon: "🔎", title: "Búsqueda de personas desaparecidas", text: "Canales para reportar personas no localizadas y actualizar casos cuando una familia reciba noticias." },
+          { icon: "📝", title: "Registro de información", text: "Formularios para organizar datos relevantes sobre necesidades, daños, contactos y solicitudes de apoyo." },
+          { icon: "📍", title: "Mapas y monitoreo", text: "Herramientas de visualización geográfica para acompañar reportes, zonas afectadas y puntos de ayuda." },
+          { icon: "🛡️", title: "Guías de autoprotección", text: "Materiales prácticos para prevenir riesgos y actuar con mayor seguridad durante la emergencia." }
+        ],
+        platforms: [
+          { icon: "👥", title: "Desaparecidos Terremoto Venezuela Emergencia · Sismo del 24 de junio", text: "Reconectemos a cada familia. Tras el terremoto, muchas familias siguen sin saber de los suyos. Si no logras comunicarte con alguien, repórtalo aquí. Y si ya lo encontraste, avísanos — para que su nombre dé tranquilidad, no angustia.", url: "https://desaparecidosterremotovenezuela.com/" },
+          { icon: "🗺️", title: "TerremotoVE - MAPA", text: "Mapa de datos para visualizar reportes y puntos relevantes de la emergencia.", url: "https://kf.kobotoolbox.org/#/forms/a8XWDsdUcpBzXGtgQmiiro/data/map" },
+          { icon: "📋", title: "TerremotoVE - CADASTRO", text: "Formulario de registro para recopilar información y necesidades relacionadas con la emergencia.", url: "https://ee.kobotoolbox.org/x/eaEmQ9YW" }
+        ]
+      },
+      en: {
+        htmlLang: "en",
+        pageTitle: "SOS VENEZUELA",
+        identity: "An initiative of Red de Migración Unidos en Brasil",
+        subtitle: "Emergency information platform",
+        heroLead: "We facilitate access to information for people, families, organizations, and institutions that want to support the situation in Venezuela caused by the earthquake.",
+        objectiveTitle: "Objective",
+        objectiveText: "This platform brings together general information, guides, maps, forms, and support channels related to the emergency caused by the earthquake in Venezuela.",
+        generalTitle: "General Information",
+        generalIntro: "Find essential resources to guide solidarity, communication, and humanitarian response actions.",
+        serviceHubTitle: "Emergency Services Hub",
+        serviceHubText: "In response to the emergency caused by the earthquake in Venezuela, this hub brings together citizen platforms, organizations and digital initiatives to facilitate access to information, reports, donations, missing persons search, medical support, shelters, logistics and humanitarian aid.",
+        quickAccessTitle: "Quick access",
+        registerInitiativeCta: "Register initiative",
+        searchLabel: "Search by keyword",
+        searchPlaceholder: "Search platform, category or description",
+        categoryLabel: "Filter by category",
+        allCategories: "All categories",
+        accessService: "Access",
+        activeStatus: "Active",
+        pendingStatus: "URL pending",
+        noResults: "No results were found for the selected search or category.",
+        guidesTitle: "Guides and Manuals",
+        manualTitle: "FUNVISIS Self-Protection Manual",
+        manualText: "Reference material with self-protection measures before, during, and after seismic events.",
+        openManual: "Open manual",
+        mapTitle: "Interactive Map",
+        mapText: "View the interactive map with geographic information for support and monitoring. If the map does not load on this page, use the direct access button.",
+        openMap: "Open interactive map",
+        platformsTitle: "Embedded platforms",
+        platformsIntro: "Access external platforms for reports, maps, and emergency information records.",
+        openPlatform: "Open platform",
+        footerMain: "SOS VENEZUELA — An initiative of Red de Migración Unidos en Brasil.",
+        footerSub: "Information, solidarity, and humanitarian support.",
+        infoCards: [
+          { icon: "🚨", title: "Emergency and humanitarian support", text: "Information to coordinate donations, volunteering, basic assistance, and solidarity actions." },
+          { icon: "🔎", title: "Search for missing people", text: "Channels to report people who have not been located and update cases when a family receives news." },
+          { icon: "📝", title: "Information registration", text: "Forms to organize relevant data about needs, damage, contacts, and requests for support." },
+          { icon: "📍", title: "Maps and monitoring", text: "Geographic visualization tools to follow reports, affected areas, and aid points." },
+          { icon: "🛡️", title: "Self-protection guides", text: "Practical materials to prevent risks and act more safely during the emergency." }
+        ],
+        platforms: [
+          { icon: "👥", title: "Missing People Venezuela Earthquake Emergency · June 24 Earthquake", text: "Let us reconnect every family. After the earthquake, many families still do not know about their loved ones. If you cannot communicate with someone, report it here. And if you have already found them, let us know — so their name brings calm, not anguish.", url: "https://desaparecidosterremotovenezuela.com/" },
+          { icon: "🗺️", title: "TerremotoVE - MAP", text: "Data map to view reports and relevant emergency points.", url: "https://kf.kobotoolbox.org/#/forms/a8XWDsdUcpBzXGtgQmiiro/data/map" },
+          { icon: "📋", title: "TerremotoVE - REGISTRATION", text: "Registration form to collect information and needs related to the emergency.", url: "https://ee.kobotoolbox.org/x/eaEmQ9YW" }
+        ]
+      },
+      pt: {
+        htmlLang: "pt-BR",
+        pageTitle: "SOS VENEZUELA",
+        identity: "Iniciativa da Red de Migración Unidos en Brasil",
+        subtitle: "Plataforma informativa de emergência",
+        heroLead: "Facilitamos o acesso à informação para pessoas, famílias, organizações e instituições que desejam apoiar a situação na Venezuela causada pelo terremoto.",
+        objectiveTitle: "Objetivo",
+        objectiveText: "Esta plataforma reúne informações gerais, guias, mapas, formulários e canais de apoio relacionados à emergência causada pelo terremoto na Venezuela.",
+        generalTitle: "Informações Gerais",
+        generalIntro: "Encontre recursos essenciais para orientar ações de solidariedade, comunicação e resposta humanitária.",
+        serviceHubTitle: "Central de Serviços de Emergência",
+        serviceHubText: "Diante da emergência causada pelo terremoto na Venezuela, esta central reúne plataformas cidadãs, organizações e iniciativas digitais para facilitar o acesso à informação, registros, doações, busca de pessoas, apoio médico, abrigos, logística e ajuda humanitária.",
+        quickAccessTitle: "Acessos rápidos",
+        registerInitiativeCta: "Cadastrar iniciativa",
+        searchLabel: "Buscar por palavra-chave",
+        searchPlaceholder: "Buscar plataforma, categoria ou descrição",
+        categoryLabel: "Filtrar por categoria",
+        allCategories: "Todas as categorias",
+        accessService: "Acessar",
+        activeStatus: "Ativo",
+        pendingStatus: "URL pendente",
+        noResults: "Nenhum resultado foi encontrado para a busca ou categoria selecionada.",
+        guidesTitle: "Guias e Manuais",
+        manualTitle: "Manual de Autoprotección de FUNVISIS",
+        manualText: "Material de referência com medidas de autoproteção antes, durante e depois de eventos sísmicos.",
+        openManual: "Abrir manual",
+        mapTitle: "Mapa Interativo",
+        mapText: "Consulte o mapa interativo com informações geográficas de apoio e monitoramento. Se o mapa não carregar nesta página, use o botão de acesso direto.",
+        openMap: "Abrir mapa interativo",
+        platformsTitle: "Plataformas incorporadas",
+        platformsIntro: "Acesse plataformas externas para relatórios, mapas e registros de informações de emergência.",
+        openPlatform: "Abrir plataforma",
+        footerMain: "SOS VENEZUELA — Iniciativa da Red de Migración Unidos en Brasil.",
+        footerSub: "Informação, solidariedade e apoio humanitário.",
+        infoCards: [
+          { icon: "🚨", title: "Emergência e apoio humanitário", text: "Informações para coordenar doações, voluntariado, assistência básica e ações solidárias." },
+          { icon: "🔎", title: "Busca de pessoas desaparecidas", text: "Canais para reportar pessoas não localizadas e atualizar casos quando uma família receber notícias." },
+          { icon: "📝", title: "Registro de informações", text: "Formulários para organizar dados relevantes sobre necessidades, danos, contatos e solicitações de apoio." },
+          { icon: "📍", title: "Mapas e monitoramento", text: "Ferramentas de visualização geográfica para acompanhar relatos, áreas afetadas e pontos de ajuda." },
+          { icon: "🛡️", title: "Guias de autoproteção", text: "Materiais práticos para prevenir riscos e agir com mais segurança durante a emergência." }
+        ],
+        platforms: [
+          { icon: "👥", title: "Desaparecidos Terremoto Venezuela Emergência · Sismo de 24 de junho", text: "Reconectemos cada família. Após o terremoto, muitas famílias ainda não sabem notícias dos seus. Se você não consegue se comunicar com alguém, reporte aqui. E se já encontrou a pessoa, avise-nos — para que seu nome traga tranquilidade, não angústia.", url: "https://desaparecidosterremotovenezuela.com/" },
+          { icon: "🗺️", title: "TerremotoVE - MAPA", text: "Mapa de dados para visualizar relatos e pontos relevantes da emergência.", url: "https://kf.kobotoolbox.org/#/forms/a8XWDsdUcpBzXGtgQmiiro/data/map" },
+          { icon: "📋", title: "TerremotoVE - CADASTRO", text: "Formulário de cadastro para coletar informações e necessidades relacionadas à emergência.", url: "https://ee.kobotoolbox.org/x/eaEmQ9YW" }
+        ]
+      }
+    };
+
+
+
+    const serviceCategories = {
+      missing: { color: "#d71920", labels: { es: "Personas desaparecidas", en: "Missing persons", pt: "Pessoas desaparecidas" } },
+      damage: { color: "#f97316", labels: { es: "Reporte de daños estructurales", en: "Structural damage reports", pt: "Reporte de danos estruturais" } },
+      rescue: { color: "#0033a0", labels: { es: "Rescate presencial y emergencia", en: "On-site rescue and emergency", pt: "Resgate presencial e emergência" } },
+      habitability: { color: "#7c3aed", labels: { es: "Inspección de habitabilidad", en: "Habitability inspection", pt: "Inspeção de habitabilidade" } },
+      donations: { color: "#16a34a", labels: { es: "Centros de acopio y donaciones", en: "Collection centers and donations", pt: "Centros de acopio e doações" } },
+      supplies: { color: "#8a5a00", labels: { es: "Insumos requeridos por zona", en: "Supplies required by area", pt: "Insumos requeridos por zona" } },
+      food: { color: "#ca8a04", labels: { es: "Centros de alimentación", en: "Food centers", pt: "Centros de alimentação" } },
+      shelters: { color: "#0891b2", labels: { es: "Refugios y alojamiento", en: "Shelters and accommodation", pt: "Refúgios e alojamento" } },
+      patients: { color: "#dc2626", labels: { es: "Pacientes en hospitales", en: "Hospital patients", pt: "Pacientes em hospitais" } },
+      pets: { color: "#9333ea", labels: { es: "Información de mascotas", en: "Pet information", pt: "Informação de mascotas" } },
+      medical: { color: "#0f766e", labels: { es: "Apoyo médico y psicológico", en: "Medical and psychological support", pt: "Apoio médico e psicológico" } },
+      portal: { color: "#2563eb", labels: { es: "Portal integrador de iniciativas", en: "Initiatives integration portal", pt: "Portal integrador de iniciativas" } },
+      financial: { color: "#15803d", labels: { es: "Donaciones", en: "Donations", pt: "Doações" } },
+      initiative: { color: "#db2777", labels: { es: "Registro de iniciativas", en: "Initiative registration", pt: "Cadastro de iniciativas" } }
+    };
+
+    const serviceDescriptions = {
+      missing: { es: "Registro, búsqueda y consulta de personas desaparecidas o localizadas después del terremoto.", en: "Registration, search and consultation for people missing or located after the earthquake.", pt: "Registro, busca e consulta de pessoas desaparecidas ou localizadas após o terremoto." },
+      damage: { es: "Registro, consulta y visualización de daños estructurales causados por el terremoto.", en: "Registration, consultation and visualization of structural damage caused by the earthquake.", pt: "Registro, consulta e visualização de danos estruturais causados pelo terremoto." },
+      rescue: { es: "Apoyo presencial, coordinación de rescate, logística y transporte humanitario.", en: "On-site support, rescue coordination, logistics and humanitarian transport.", pt: "Apoio presencial, coordenação de resgate, logística e transporte humanitário." },
+      habitability: { es: "Registro de ingenieros y apoyo para inspección de habitabilidad de edificaciones.", en: "Engineer registration and support for building habitability inspections.", pt: "Cadastro de engenheiros e apoio para inspeção de habitabilidade de edificações." },
+      donations: { es: "Centros de acopio, donaciones, transporte y apoyo logístico.", en: "Collection centers, donations, transport and logistics support.", pt: "Centros de arrecadação, doações, transporte e apoio logístico." },
+      supplies: { es: "Espacio reservado para futuras informaciones sobre insumos requeridos por región.", en: "Reserved space for future information about supplies required by region.", pt: "Espaço reservado para futuras informações sobre insumos requeridos por região." },
+      food: { es: "Información sobre puntos de alimentación comunitaria.", en: "Information about community food distribution points.", pt: "Informações sobre pontos de alimentação comunitária." },
+      shelters: { es: "Información sobre refugios, albergues y alojamientos temporales.", en: "Information about shelters, refuge spaces and temporary accommodation.", pt: "Informações sobre refúgios, abrigos e alojamentos temporários." },
+      patients: { es: "Consulta y registro de pacientes hospitalizados después del terremoto.", en: "Search and registration for patients hospitalized after the earthquake.", pt: "Consulta e registro de pacientes hospitalizados após o terremoto." },
+      pets: { es: "Información sobre animales perdidos, encontrados o rescatados.", en: "Information about lost, found or rescued animals.", pt: "Informações sobre animais perdidos, encontrados ou resgatados." },
+      medical: { es: "Canales de apoyo médico, psicológico y emergencial.", en: "Medical, psychological and emergency support channels.", pt: "Canais de apoio médico, psicológico e emergencial." },
+      portal: { es: "Portal que reúne iniciativas de la sociedad civil para donaciones, voluntariado, personas desaparecidas, daños y apoyo humanitario.", en: "Portal that brings together civil society initiatives for donations, volunteering, missing persons, damage and humanitarian support.", pt: "Portal que reúne iniciativas da sociedade civil para doações, voluntariado, pessoas desaparecidas, danos e apoio humanitário." },
+      financial: { es: "Canal para contribución financiera en apoyo a las personas afectadas.", en: "Channel for financial contributions to support affected people.", pt: "Canal para contribuição financeira em apoio às pessoas afetadas." },
+      initiative: { es: "Registra organizaciones, acciones solidarias, servicios, puntos de apoyo, voluntariado u otras iniciativas relacionadas con la respuesta al terremoto.", en: "Register organizations, solidarity actions, services, support points, volunteering or other initiatives related to the earthquake response.", pt: "Cadastre organizações, ações solidárias, serviços, pontos de apoio, voluntariado ou outras iniciativas relacionadas à resposta ao terremoto." }
+    };
+
+    const emergencyServices = [
+      {
+        icon: "📝",
+        category: "initiative",
+        name: { es: "Registrar iniciativa de apoyo", en: "Register support initiative", pt: "Cadastrar iniciativa de apoio" },
+        url: "https://docs.google.com/forms/d/e/1FAIpQLSfQLsFPPGsuOTpJ_kpRhlbmuujDx8Omr3JznRIzXyCOKJhORA/viewform",
+        buttonLabel: { es: "Completar formulario", en: "Fill out form", pt: "Preencher formulário" },
+        keywords: "iniciativa cadastro apoyo apoio voluntariado organización organizacion organizações organization support registro cadastrar servicios serviços formulario"
+      },
+      { icon: "🔎", category: "missing", name: "Venezuela Reporta", url: "https://venezuelareporta.org" },
+      { icon: "🔎", category: "missing", name: "Venezuela Te Busca", url: "https://venezuelatebusca.com" },
+      { icon: "👥", category: "missing", name: "Desaparecidos Terremoto Venezuela", url: "https://desaparecidosterremotovenezuela.com" },
+      { icon: "🏚️", category: "damage", name: "Enlace para agregar información de daños", url: "https://t.co/WImuEZ7G2G" },
+      { icon: "📊", category: "damage", name: "Consultar reportes registrados", url: "https://t.co/FPdsHbKfiH" },
+      { icon: "🗺️", category: "damage", name: "Terremoto Venezuela", url: "https://terremotovenezuela.com" },
+      { icon: "📱", category: "damage", name: "Tilin App", url: "https://tilinapp.com" },
+      { icon: "🚑", category: "rescue", name: "Rescate VE", url: "https://rescate-ve.vercel.app" },
+      { icon: "🏗️", category: "habitability", name: "Habitable", url: "https://habitable.lovable.app" },
+      { icon: "📦", category: "donations", name: "Ayuda para Venezuela", url: "https://ayudaparavenezuela.com" },
+      { icon: "🤝", category: "donations", name: "VeneConnect Apoio Terremoto", url: "https://veneconnect.com/apoyo-terremoto" },
+      { icon: "🚚", category: "donations", name: "Tu Gruero", url: "https://tugruero.com" },
+      { icon: "🧰", category: "supplies", name: "Insumos requeridos por zona", url: "" },
+      { icon: "🍲", category: "food", name: "Refugios Venezuela", url: "https://refugiosvenezuela.com" },
+      { icon: "🏠", category: "shelters", name: "Refugios Venezuela", url: "https://refugiosvenezuela.com" },
+      { icon: "🏥", category: "patients", name: "Pacientes Terremoto VZLA", url: "https://pacientesterremotovzla.lovable.app" },
+      { icon: "🐾", category: "pets", name: "Huellas Can", url: "https://huellascan.com/terremoto" },
+      { icon: "🩺", category: "medical", name: "Nueve Once", url: "https://nueveonce.com" },
+      { icon: "🧠", category: "medical", name: "VenEmergencia", url: "https://venemergencia.com" },
+      { icon: "🌐", category: "portal", name: "Hazlo Hoy Terremoto Caracas", url: "https://hazlohoy.org/terremoto-caracas/" },
+      { icon: "💛", category: "financial", name: "Campaña de donaciones", url: "https://donate.stripe.com/eVq14m62u9BRdpm4Xw2sM02" }
+    ];
+
+    const quickAccessLinks = [
+      { label: { es: "Registrar persona desaparecida", en: "Register missing person", pt: "Registrar pessoa desaparecida" }, url: "https://desaparecidosterremotovenezuela.com" },
+      { label: { es: "Venezuela Te Busca", en: "Venezuela Te Busca", pt: "Venezuela Te Busca" }, url: "https://venezuelatebusca.com" },
+      { label: { es: "Mapa de daños", en: "Damage map", pt: "Mapa de danos" }, url: "https://terremotovenezuela.com" },
+      { label: { es: "Reportar daños", en: "Report damage", pt: "Reportar danos" }, url: "https://t.co/WImuEZ7G2G" },
+      { label: { es: "Consultar reportes", en: "View reports", pt: "Consultar reportes" }, url: "https://t.co/FPdsHbKfiH" },
+      { label: { es: "Portal de apoyo", en: "Support portal", pt: "Portal de apoio" }, url: "https://hazlohoy.org/terremoto-caracas/" },
+      { label: { es: "Hacer donación", en: "Donate", pt: "Fazer doação" }, url: "https://donate.stripe.com/eVq14m62u9BRdpm4Xw2sM02" }
+    ];
+
+    const translatableNodes = document.querySelectorAll("[data-i18n]");
+    const languageButtons = document.querySelectorAll(".lang-btn");
+    const infoCardsContainer = document.getElementById("infoCards");
+    const platformCardsContainer = document.getElementById("platformCards");
+    const quickLinksContainer = document.getElementById("quickLinks");
+    const serviceCardsContainer = document.getElementById("serviceCards");
+    const serviceSearchInput = document.getElementById("serviceSearch");
+    const categoryFilter = document.getElementById("categoryFilter");
+    const noServiceResults = document.getElementById("noServiceResults");
+    let currentLanguage = "es";
+
+    function createCard({ icon, title, text, url }, buttonText) {
+      const article = document.createElement("article");
+      article.className = "card";
+
+      const linkMarkup = url
+        ? `<a class="btn secondary" href="${url}" target="_blank" rel="noopener noreferrer">${buttonText}</a>`
+        : "";
+
+      article.innerHTML = `
+        <span class="icon" aria-hidden="true">${icon}</span>
+        <h3>${title}</h3>
+        <p>${text}</p>
+        ${linkMarkup}
+      `;
+
+      return article;
+    }
+
+    function renderCards(language) {
+      const content = translations[language];
+      infoCardsContainer.replaceChildren(...content.infoCards.map((card) => createCard(card)));
+      platformCardsContainer.replaceChildren(...content.platforms.map((card) => createCard(card, content.openPlatform)));
+    }
+
+
+
+    function getCategoryLabel(categoryKey, language) {
+      return serviceCategories[categoryKey].labels[language] || serviceCategories[categoryKey].labels.es;
+    }
+
+    function renderQuickLinks(language) {
+      quickLinksContainer.replaceChildren(...quickAccessLinks.map((link) => {
+        const anchor = document.createElement("a");
+        anchor.className = "quick-link";
+        anchor.href = link.url;
+        anchor.target = "_blank";
+        anchor.rel = "noopener noreferrer";
+        anchor.textContent = link.label[language] || link.label.es;
+        return anchor;
+      }));
+    }
+
+    function renderCategoryOptions(language) {
+      const selectedValue = categoryFilter.value;
+      const options = [new Option(translations[language].allCategories, "all")];
+
+      Object.entries(serviceCategories).forEach(([key, category]) => {
+        options.push(new Option(category.labels[language] || category.labels.es, key));
+      });
+
+      categoryFilter.replaceChildren(...options);
+      categoryFilter.value = selectedValue && serviceCategories[selectedValue] ? selectedValue : "all";
+    }
+
+    function createServiceCard(service, language) {
+      const category = serviceCategories[service.category];
+      const categoryLabel = getCategoryLabel(service.category, language);
+      const description = service.description?.[language] || serviceDescriptions[service.category][language] || serviceDescriptions[service.category].es;
+      const serviceName = typeof service.name === "string" ? service.name : (service.name[language] || service.name.es);
+      const serviceButtonLabel = service.buttonLabel?.[language] || translations[language].accessService;
+      const hasUrl = Boolean(service.url);
+      const article = document.createElement("article");
+      article.className = "card service-card";
+      article.style.setProperty("--category-color", category.color);
+
+      const statusText = hasUrl ? translations[language].activeStatus : translations[language].pendingStatus;
+      const button = hasUrl
+        ? `<a class="btn secondary" href="${service.url}" target="_blank" rel="noopener noreferrer">${serviceButtonLabel}</a>`
+        : `<span class="btn disabled" aria-disabled="true">${translations[language].pendingStatus}</span>`;
+
+      article.innerHTML = `
+        <div class="service-meta">
+          <span class="icon" aria-hidden="true">${service.icon}</span>
+          <span class="status-pill ${hasUrl ? "" : "pending"}">${statusText}</span>
+        </div>
+        <span class="category-pill">${categoryLabel}</span>
+        <h3>${serviceName}</h3>
+        <p>${description}</p>
+        ${button}
+      `;
+
+      return article;
+    }
+
+    function renderServiceCards(language) {
+      const searchTerm = serviceSearchInput.value.trim().toLowerCase();
+      const selectedCategory = categoryFilter.value || "all";
+
+      const filteredServices = emergencyServices.filter((service) => {
+        const categoryLabel = getCategoryLabel(service.category, language);
+        const description = service.description?.[language] || serviceDescriptions[service.category][language] || serviceDescriptions[service.category].es;
+        const serviceName = typeof service.name === "string" ? service.name : (service.name[language] || service.name.es);
+        const keywords = service.keywords || "";
+        const searchableText = `${serviceName} ${categoryLabel} ${description} ${keywords}`.toLowerCase();
+        const matchesSearch = !searchTerm || searchableText.includes(searchTerm);
+        const matchesCategory = selectedCategory === "all" || service.category === selectedCategory;
+        return matchesSearch && matchesCategory;
+      });
+
+      serviceCardsContainer.replaceChildren(...filteredServices.map((service) => createServiceCard(service, language)));
+      noServiceResults.classList.toggle("show", filteredServices.length === 0);
+    }
+
+    function renderServiceHub(language) {
+      renderQuickLinks(language);
+      renderCategoryOptions(language);
+      renderServiceCards(language);
+    }
+
+    function setLanguage(language) {
+      const content = translations[language] || translations.es;
+      currentLanguage = translations[language] ? language : "es";
+
+      document.documentElement.lang = content.htmlLang;
+      document.title = content.pageTitle;
+
+      translatableNodes.forEach((node) => {
+        const key = node.dataset.i18n;
+        if (content[key]) {
+          node.textContent = content[key];
+        }
+      });
+
+      document.querySelectorAll("[data-i18n-placeholder]").forEach((node) => {
+        const key = node.dataset.i18nPlaceholder;
+        if (content[key]) {
+          node.setAttribute("placeholder", content[key]);
+        }
+      });
+
+      renderCards(currentLanguage);
+      renderServiceHub(currentLanguage);
+
+      languageButtons.forEach((button) => {
+        const isActive = button.dataset.lang === currentLanguage;
+        button.classList.toggle("active", isActive);
+        button.setAttribute("aria-pressed", String(isActive));
+      });
+    }
+
+    languageButtons.forEach((button) => {
+      button.addEventListener("click", () => setLanguage(button.dataset.lang));
+    });
+
+    serviceSearchInput.addEventListener("input", () => renderServiceCards(currentLanguage));
+    categoryFilter.addEventListener("change", () => renderServiceCards(currentLanguage));
+
+    setLanguage("es");
+  </script>
+</body>
+</html>
