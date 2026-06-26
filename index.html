@@ -147,6 +147,13 @@
       font-size: 1.08rem;
     }
 
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
     .language-switcher {
       display: flex;
       gap: 10px;
@@ -493,6 +500,7 @@
         width: 100%;
       }
 
+      .hero-actions,
       .language-switcher,
       .btn {
         width: 100%;
@@ -523,11 +531,14 @@
         </div>
         <p class="subtitle" data-i18n="subtitle">Plataforma informativa de emergencia</p>
         <p class="lead" data-i18n="heroLead">Facilitamos el acceso a información para personas, familias, organizaciones e instituciones que desean apoyar la situación en Venezuela causada por el terremoto.</p>
-        <nav class="language-switcher" aria-label="Language selector">
-          <button class="lang-btn active" type="button" data-lang="es">Español</button>
-          <button class="lang-btn" type="button" data-lang="en">English</button>
-          <button class="lang-btn" type="button" data-lang="pt">Português</button>
-        </nav>
+        <div class="hero-actions">
+          <nav class="language-switcher" aria-label="Language selector">
+            <button class="lang-btn active" type="button" data-lang="es">Español</button>
+            <button class="lang-btn" type="button" data-lang="en">English</button>
+            <button class="lang-btn" type="button" data-lang="pt">Português</button>
+          </nav>
+          <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSfQLsFPPGsuOTpJ_kpRhlbmuujDx8Omr3JznRIzXyCOKJhORA/viewform" target="_blank" rel="noopener noreferrer" data-i18n="registerInitiativeCta">Registrar iniciativa</a>
+        </div>
       </div>
     </div>
   </header>
@@ -622,6 +633,7 @@
         serviceHubTitle: "Central de Servicios de Emergencia",
         serviceHubText: "Ante la emergencia causada por el terremoto en Venezuela, esta central reúne plataformas ciudadanas, organizaciones e iniciativas digitales para facilitar el acceso a información, reportes, donaciones, búsqueda de personas, apoyo médico, refugios, logística y ayuda humanitaria.",
         quickAccessTitle: "Accesos rápidos",
+        registerInitiativeCta: "Registrar iniciativa",
         searchLabel: "Buscar por palabra clave",
         searchPlaceholder: "Buscar plataforma, categoría o descripción",
         categoryLabel: "Filtrar por categoría",
@@ -668,6 +680,7 @@
         serviceHubTitle: "Emergency Services Hub",
         serviceHubText: "In response to the emergency caused by the earthquake in Venezuela, this hub brings together citizen platforms, organizations and digital initiatives to facilitate access to information, reports, donations, missing persons search, medical support, shelters, logistics and humanitarian aid.",
         quickAccessTitle: "Quick access",
+        registerInitiativeCta: "Register initiative",
         searchLabel: "Search by keyword",
         searchPlaceholder: "Search platform, category or description",
         categoryLabel: "Filter by category",
@@ -714,6 +727,7 @@
         serviceHubTitle: "Central de Serviços de Emergência",
         serviceHubText: "Diante da emergência causada pelo terremoto na Venezuela, esta central reúne plataformas cidadãs, organizações e iniciativas digitais para facilitar o acesso à informação, registros, doações, busca de pessoas, apoio médico, abrigos, logística e ajuda humanitária.",
         quickAccessTitle: "Acessos rápidos",
+        registerInitiativeCta: "Cadastrar iniciativa",
         searchLabel: "Buscar por palavra-chave",
         searchPlaceholder: "Buscar plataforma, categoria ou descrição",
         categoryLabel: "Filtrar por categoria",
@@ -764,7 +778,8 @@
       pets: { color: "#9333ea", labels: { es: "Información de mascotas", en: "Pet information", pt: "Informação de mascotas" } },
       medical: { color: "#0f766e", labels: { es: "Apoyo médico y psicológico", en: "Medical and psychological support", pt: "Apoio médico e psicológico" } },
       portal: { color: "#2563eb", labels: { es: "Portal integrador de iniciativas", en: "Initiatives integration portal", pt: "Portal integrador de iniciativas" } },
-      financial: { color: "#15803d", labels: { es: "Donaciones", en: "Donations", pt: "Doações" } }
+      financial: { color: "#15803d", labels: { es: "Donaciones", en: "Donations", pt: "Doações" } },
+      initiative: { color: "#db2777", labels: { es: "Registro de iniciativas", en: "Initiative registration", pt: "Cadastro de iniciativas" } }
     };
 
     const serviceDescriptions = {
@@ -780,10 +795,19 @@
       pets: { es: "Información sobre animales perdidos, encontrados o rescatados.", en: "Information about lost, found or rescued animals.", pt: "Informações sobre animais perdidos, encontrados ou resgatados." },
       medical: { es: "Canales de apoyo médico, psicológico y emergencial.", en: "Medical, psychological and emergency support channels.", pt: "Canais de apoio médico, psicológico e emergencial." },
       portal: { es: "Portal que reúne iniciativas de la sociedad civil para donaciones, voluntariado, personas desaparecidas, daños y apoyo humanitario.", en: "Portal that brings together civil society initiatives for donations, volunteering, missing persons, damage and humanitarian support.", pt: "Portal que reúne iniciativas da sociedade civil para doações, voluntariado, pessoas desaparecidas, danos e apoio humanitário." },
-      financial: { es: "Canal para contribución financiera en apoyo a las personas afectadas.", en: "Channel for financial contributions to support affected people.", pt: "Canal para contribuição financeira em apoio às pessoas afetadas." }
+      financial: { es: "Canal para contribución financiera en apoyo a las personas afectadas.", en: "Channel for financial contributions to support affected people.", pt: "Canal para contribuição financeira em apoio às pessoas afetadas." },
+      initiative: { es: "Registra organizaciones, acciones solidarias, servicios, puntos de apoyo, voluntariado u otras iniciativas relacionadas con la respuesta al terremoto.", en: "Register organizations, solidarity actions, services, support points, volunteering or other initiatives related to the earthquake response.", pt: "Cadastre organizações, ações solidárias, serviços, pontos de apoio, voluntariado ou outras iniciativas relacionadas à resposta ao terremoto." }
     };
 
     const emergencyServices = [
+      {
+        icon: "📝",
+        category: "initiative",
+        name: { es: "Registrar iniciativa de apoyo", en: "Register support initiative", pt: "Cadastrar iniciativa de apoio" },
+        url: "https://docs.google.com/forms/d/e/1FAIpQLSfQLsFPPGsuOTpJ_kpRhlbmuujDx8Omr3JznRIzXyCOKJhORA/viewform",
+        buttonLabel: { es: "Completar formulario", en: "Fill out form", pt: "Preencher formulário" },
+        keywords: "iniciativa cadastro apoyo apoio voluntariado organización organizacion organizações organization support registro cadastrar servicios serviços formulario"
+      },
       { icon: "🔎", category: "missing", name: "Venezuela Reporta", url: "https://venezuelareporta.org" },
       { icon: "🔎", category: "missing", name: "Venezuela Te Busca", url: "https://venezuelatebusca.com" },
       { icon: "👥", category: "missing", name: "Desaparecidos Terremoto Venezuela", url: "https://desaparecidosterremotovenezuela.com" },
@@ -885,7 +909,9 @@
     function createServiceCard(service, language) {
       const category = serviceCategories[service.category];
       const categoryLabel = getCategoryLabel(service.category, language);
-      const description = serviceDescriptions[service.category][language] || serviceDescriptions[service.category].es;
+      const description = service.description?.[language] || serviceDescriptions[service.category][language] || serviceDescriptions[service.category].es;
+      const serviceName = typeof service.name === "string" ? service.name : (service.name[language] || service.name.es);
+      const serviceButtonLabel = service.buttonLabel?.[language] || translations[language].accessService;
       const hasUrl = Boolean(service.url);
       const article = document.createElement("article");
       article.className = "card service-card";
@@ -893,7 +919,7 @@
 
       const statusText = hasUrl ? translations[language].activeStatus : translations[language].pendingStatus;
       const button = hasUrl
-        ? `<a class="btn secondary" href="${service.url}" target="_blank" rel="noopener noreferrer">${translations[language].accessService}</a>`
+        ? `<a class="btn secondary" href="${service.url}" target="_blank" rel="noopener noreferrer">${serviceButtonLabel}</a>`
         : `<span class="btn disabled" aria-disabled="true">${translations[language].pendingStatus}</span>`;
 
       article.innerHTML = `
@@ -902,7 +928,7 @@
           <span class="status-pill ${hasUrl ? "" : "pending"}">${statusText}</span>
         </div>
         <span class="category-pill">${categoryLabel}</span>
-        <h3>${service.name}</h3>
+        <h3>${serviceName}</h3>
         <p>${description}</p>
         ${button}
       `;
@@ -916,8 +942,10 @@
 
       const filteredServices = emergencyServices.filter((service) => {
         const categoryLabel = getCategoryLabel(service.category, language);
-        const description = serviceDescriptions[service.category][language] || serviceDescriptions[service.category].es;
-        const searchableText = `${service.name} ${categoryLabel} ${description}`.toLowerCase();
+        const description = service.description?.[language] || serviceDescriptions[service.category][language] || serviceDescriptions[service.category].es;
+        const serviceName = typeof service.name === "string" ? service.name : (service.name[language] || service.name.es);
+        const keywords = service.keywords || "";
+        const searchableText = `${serviceName} ${categoryLabel} ${description} ${keywords}`.toLowerCase();
         const matchesSearch = !searchTerm || searchableText.includes(searchTerm);
         const matchesCategory = selectedCategory === "all" || service.category === selectedCategory;
         return matchesSearch && matchesCategory;
