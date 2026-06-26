@@ -301,6 +301,159 @@
       font-size: 1.05rem;
     }
 
+
+
+    .service-hub {
+      display: grid;
+      gap: 22px;
+      margin-top: 24px;
+    }
+
+    .quick-access {
+      padding: 22px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(0, 51, 160, 0.10), rgba(255, 209, 0, 0.16));
+      border: 1px solid rgba(0, 51, 160, 0.10);
+    }
+
+    .quick-access h3,
+    .service-controls label {
+      color: var(--blue);
+      font-size: 1.05rem;
+      margin-bottom: 12px;
+    }
+
+    .quick-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .quick-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: var(--white);
+      background: var(--blue);
+      font-weight: 800;
+      box-shadow: 0 10px 22px rgba(0, 51, 160, 0.18);
+    }
+
+    .service-controls {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 16px;
+      align-items: end;
+      padding: 20px;
+      border-radius: 20px;
+      background: var(--soft);
+      border: 1px solid rgba(0, 51, 160, 0.08);
+    }
+
+    .control-group {
+      display: grid;
+      gap: 8px;
+    }
+
+    .service-controls input,
+    .service-controls select {
+      width: 100%;
+      min-height: 52px;
+      padding: 12px 15px;
+      border: 2px solid rgba(0, 51, 160, 0.14);
+      border-radius: 15px;
+      background: var(--white);
+      color: var(--ink);
+      font: inherit;
+      outline: none;
+    }
+
+    .service-controls input:focus,
+    .service-controls select:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 4px rgba(0, 51, 160, 0.10);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .service-card {
+      position: relative;
+      overflow: hidden;
+      border-top: 7px solid var(--category-color, var(--blue));
+    }
+
+    .service-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .category-pill,
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 900;
+    }
+
+    .category-pill {
+      color: var(--category-color, var(--blue));
+      background: color-mix(in srgb, var(--category-color, var(--blue)) 13%, white);
+    }
+
+    .status-pill {
+      color: #146c2e;
+      background: #e6f7ec;
+    }
+
+    .status-pill.pending {
+      color: #8a5a00;
+      background: #fff4cf;
+    }
+
+    .btn.disabled,
+    .btn[aria-disabled="true"] {
+      pointer-events: none;
+      cursor: not-allowed;
+      color: #6b7280;
+      background: #e5e7eb;
+      box-shadow: none;
+    }
+
+    .no-results {
+      display: none;
+      padding: 22px;
+      border-radius: 18px;
+      text-align: center;
+      color: var(--muted);
+      background: #fff7d6;
+      border: 1px solid rgba(255, 209, 0, 0.55);
+      font-weight: 800;
+    }
+
+    .no-results.show {
+      display: block;
+    }
+
+
+    @media (max-width: 980px) {
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
     @media (max-width: 860px) {
       .grid {
         grid-template-columns: repeat(2, 1fr);
@@ -330,8 +483,14 @@
         height: 76px;
       }
 
-      .grid {
+      .grid,
+      .services-grid,
+      .service-controls {
         grid-template-columns: 1fr;
+      }
+
+      .quick-link {
+        width: 100%;
       }
 
       .language-switcher,
@@ -385,6 +544,35 @@
       <div class="grid" id="infoCards"></div>
     </section>
 
+
+
+    <section id="service-hub">
+      <h2 class="section-title"><span>🧭</span><span data-i18n="serviceHubTitle">Central de Servicios de Emergencia</span></h2>
+      <p class="section-text" data-i18n="serviceHubText">Ante la emergencia causada por el terremoto en Venezuela, esta central reúne plataformas ciudadanas, organizaciones e iniciativas digitales para facilitar el acceso a información, reportes, donaciones, búsqueda de personas, apoyo médico, refugios, logística y ayuda humanitaria.</p>
+
+      <div class="service-hub">
+        <div class="quick-access">
+          <h3 data-i18n="quickAccessTitle">Accesos rápidos</h3>
+          <div class="quick-links" id="quickLinks"></div>
+        </div>
+
+        <div class="service-controls" aria-label="Filtros de servicios de emergencia">
+          <div class="control-group">
+            <label for="serviceSearch" data-i18n="searchLabel">Buscar por palabra clave</label>
+            <input id="serviceSearch" type="search" data-i18n-placeholder="searchPlaceholder" placeholder="Buscar plataforma, categoría o descripción" />
+          </div>
+          <div class="control-group">
+            <label for="categoryFilter" data-i18n="categoryLabel">Filtrar por categoría</label>
+            <select id="categoryFilter"></select>
+          </div>
+        </div>
+
+        <div class="services-grid" id="serviceCards"></div>
+        <p class="no-results" id="noServiceResults" data-i18n="noResults">No se encontraron resultados para la búsqueda o categoría seleccionada.</p>
+      </div>
+    </section>
+
+
     <section id="guides">
       <h2 class="section-title"><span>📘</span><span data-i18n="guidesTitle">Guías y Manuales</span></h2>
       <div class="grid">
@@ -431,6 +619,17 @@
         objectiveText: "Esta plataforma reúne información general, guías, mapas, formularios y canales de apoyo relacionados con la emergencia causada por el terremoto en Venezuela.",
         generalTitle: "Informaciones Generales",
         generalIntro: "Encuentra recursos esenciales para orientar acciones de solidaridad, comunicación y respuesta humanitaria.",
+        serviceHubTitle: "Central de Servicios de Emergencia",
+        serviceHubText: "Ante la emergencia causada por el terremoto en Venezuela, esta central reúne plataformas ciudadanas, organizaciones e iniciativas digitales para facilitar el acceso a información, reportes, donaciones, búsqueda de personas, apoyo médico, refugios, logística y ayuda humanitaria.",
+        quickAccessTitle: "Accesos rápidos",
+        searchLabel: "Buscar por palabra clave",
+        searchPlaceholder: "Buscar plataforma, categoría o descripción",
+        categoryLabel: "Filtrar por categoría",
+        allCategories: "Todas las categorías",
+        accessService: "Acceder",
+        activeStatus: "Activo",
+        pendingStatus: "URL pendiente",
+        noResults: "No se encontraron resultados para la búsqueda o categoría seleccionada.",
         guidesTitle: "Guías y Manuales",
         manualTitle: "Manual de Autoprotección de FUNVISIS",
         manualText: "Material de referencia para medidas de autoprotección antes, durante y después de eventos sísmicos.",
@@ -466,6 +665,17 @@
         objectiveText: "This platform brings together general information, guides, maps, forms, and support channels related to the emergency caused by the earthquake in Venezuela.",
         generalTitle: "General Information",
         generalIntro: "Find essential resources to guide solidarity, communication, and humanitarian response actions.",
+        serviceHubTitle: "Emergency Services Hub",
+        serviceHubText: "In response to the emergency caused by the earthquake in Venezuela, this hub brings together citizen platforms, organizations and digital initiatives to facilitate access to information, reports, donations, missing persons search, medical support, shelters, logistics and humanitarian aid.",
+        quickAccessTitle: "Quick access",
+        searchLabel: "Search by keyword",
+        searchPlaceholder: "Search platform, category or description",
+        categoryLabel: "Filter by category",
+        allCategories: "All categories",
+        accessService: "Access",
+        activeStatus: "Active",
+        pendingStatus: "URL pending",
+        noResults: "No results were found for the selected search or category.",
         guidesTitle: "Guides and Manuals",
         manualTitle: "FUNVISIS Self-Protection Manual",
         manualText: "Reference material with self-protection measures before, during, and after seismic events.",
@@ -501,6 +711,17 @@
         objectiveText: "Esta plataforma reúne informações gerais, guias, mapas, formulários e canais de apoio relacionados à emergência causada pelo terremoto na Venezuela.",
         generalTitle: "Informações Gerais",
         generalIntro: "Encontre recursos essenciais para orientar ações de solidariedade, comunicação e resposta humanitária.",
+        serviceHubTitle: "Central de Serviços de Emergência",
+        serviceHubText: "Diante da emergência causada pelo terremoto na Venezuela, esta central reúne plataformas cidadãs, organizações e iniciativas digitais para facilitar o acesso à informação, registros, doações, busca de pessoas, apoio médico, abrigos, logística e ajuda humanitária.",
+        quickAccessTitle: "Acessos rápidos",
+        searchLabel: "Buscar por palavra-chave",
+        searchPlaceholder: "Buscar plataforma, categoria ou descrição",
+        categoryLabel: "Filtrar por categoria",
+        allCategories: "Todas as categorias",
+        accessService: "Acessar",
+        activeStatus: "Ativo",
+        pendingStatus: "URL pendente",
+        noResults: "Nenhum resultado foi encontrado para a busca ou categoria selecionada.",
         guidesTitle: "Guias e Manuais",
         manualTitle: "Manual de Autoprotección de FUNVISIS",
         manualText: "Material de referência com medidas de autoproteção antes, durante e depois de eventos sísmicos.",
@@ -528,10 +749,84 @@
       }
     };
 
+
+
+    const serviceCategories = {
+      missing: { color: "#d71920", labels: { es: "Personas desaparecidas", en: "Missing persons", pt: "Pessoas desaparecidas" } },
+      damage: { color: "#f97316", labels: { es: "Reporte de daños estructurales", en: "Structural damage reports", pt: "Reporte de danos estruturais" } },
+      rescue: { color: "#0033a0", labels: { es: "Rescate presencial y emergencia", en: "On-site rescue and emergency", pt: "Resgate presencial e emergência" } },
+      habitability: { color: "#7c3aed", labels: { es: "Inspección de habitabilidad", en: "Habitability inspection", pt: "Inspeção de habitabilidade" } },
+      donations: { color: "#16a34a", labels: { es: "Centros de acopio y donaciones", en: "Collection centers and donations", pt: "Centros de acopio e doações" } },
+      supplies: { color: "#8a5a00", labels: { es: "Insumos requeridos por zona", en: "Supplies required by area", pt: "Insumos requeridos por zona" } },
+      food: { color: "#ca8a04", labels: { es: "Centros de alimentación", en: "Food centers", pt: "Centros de alimentação" } },
+      shelters: { color: "#0891b2", labels: { es: "Refugios y alojamiento", en: "Shelters and accommodation", pt: "Refúgios e alojamento" } },
+      patients: { color: "#dc2626", labels: { es: "Pacientes en hospitales", en: "Hospital patients", pt: "Pacientes em hospitais" } },
+      pets: { color: "#9333ea", labels: { es: "Información de mascotas", en: "Pet information", pt: "Informação de mascotas" } },
+      medical: { color: "#0f766e", labels: { es: "Apoyo médico y psicológico", en: "Medical and psychological support", pt: "Apoio médico e psicológico" } },
+      portal: { color: "#2563eb", labels: { es: "Portal integrador de iniciativas", en: "Initiatives integration portal", pt: "Portal integrador de iniciativas" } },
+      financial: { color: "#15803d", labels: { es: "Donaciones", en: "Donations", pt: "Doações" } }
+    };
+
+    const serviceDescriptions = {
+      missing: { es: "Registro, búsqueda y consulta de personas desaparecidas o localizadas después del terremoto.", en: "Registration, search and consultation for people missing or located after the earthquake.", pt: "Registro, busca e consulta de pessoas desaparecidas ou localizadas após o terremoto." },
+      damage: { es: "Registro, consulta y visualización de daños estructurales causados por el terremoto.", en: "Registration, consultation and visualization of structural damage caused by the earthquake.", pt: "Registro, consulta e visualização de danos estruturais causados pelo terremoto." },
+      rescue: { es: "Apoyo presencial, coordinación de rescate, logística y transporte humanitario.", en: "On-site support, rescue coordination, logistics and humanitarian transport.", pt: "Apoio presencial, coordenação de resgate, logística e transporte humanitário." },
+      habitability: { es: "Registro de ingenieros y apoyo para inspección de habitabilidad de edificaciones.", en: "Engineer registration and support for building habitability inspections.", pt: "Cadastro de engenheiros e apoio para inspeção de habitabilidade de edificações." },
+      donations: { es: "Centros de acopio, donaciones, transporte y apoyo logístico.", en: "Collection centers, donations, transport and logistics support.", pt: "Centros de arrecadação, doações, transporte e apoio logístico." },
+      supplies: { es: "Espacio reservado para futuras informaciones sobre insumos requeridos por región.", en: "Reserved space for future information about supplies required by region.", pt: "Espaço reservado para futuras informações sobre insumos requeridos por região." },
+      food: { es: "Información sobre puntos de alimentación comunitaria.", en: "Information about community food distribution points.", pt: "Informações sobre pontos de alimentação comunitária." },
+      shelters: { es: "Información sobre refugios, albergues y alojamientos temporales.", en: "Information about shelters, refuge spaces and temporary accommodation.", pt: "Informações sobre refúgios, abrigos e alojamentos temporários." },
+      patients: { es: "Consulta y registro de pacientes hospitalizados después del terremoto.", en: "Search and registration for patients hospitalized after the earthquake.", pt: "Consulta e registro de pacientes hospitalizados após o terremoto." },
+      pets: { es: "Información sobre animales perdidos, encontrados o rescatados.", en: "Information about lost, found or rescued animals.", pt: "Informações sobre animais perdidos, encontrados ou resgatados." },
+      medical: { es: "Canales de apoyo médico, psicológico y emergencial.", en: "Medical, psychological and emergency support channels.", pt: "Canais de apoio médico, psicológico e emergencial." },
+      portal: { es: "Portal que reúne iniciativas de la sociedad civil para donaciones, voluntariado, personas desaparecidas, daños y apoyo humanitario.", en: "Portal that brings together civil society initiatives for donations, volunteering, missing persons, damage and humanitarian support.", pt: "Portal que reúne iniciativas da sociedade civil para doações, voluntariado, pessoas desaparecidas, danos e apoio humanitário." },
+      financial: { es: "Canal para contribución financiera en apoyo a las personas afectadas.", en: "Channel for financial contributions to support affected people.", pt: "Canal para contribuição financeira em apoio às pessoas afetadas." }
+    };
+
+    const emergencyServices = [
+      { icon: "🔎", category: "missing", name: "Venezuela Reporta", url: "https://venezuelareporta.org" },
+      { icon: "🔎", category: "missing", name: "Venezuela Te Busca", url: "https://venezuelatebusca.com" },
+      { icon: "👥", category: "missing", name: "Desaparecidos Terremoto Venezuela", url: "https://desaparecidosterremotovenezuela.com" },
+      { icon: "🏚️", category: "damage", name: "Enlace para agregar información de daños", url: "https://t.co/WImuEZ7G2G" },
+      { icon: "📊", category: "damage", name: "Consultar reportes registrados", url: "https://t.co/FPdsHbKfiH" },
+      { icon: "🗺️", category: "damage", name: "Terremoto Venezuela", url: "https://terremotovenezuela.com" },
+      { icon: "📱", category: "damage", name: "Tilin App", url: "https://tilinapp.com" },
+      { icon: "🚑", category: "rescue", name: "Rescate VE", url: "https://rescate-ve.vercel.app" },
+      { icon: "🏗️", category: "habitability", name: "Habitable", url: "https://habitable.lovable.app" },
+      { icon: "📦", category: "donations", name: "Ayuda para Venezuela", url: "https://ayudaparavenezuela.com" },
+      { icon: "🤝", category: "donations", name: "VeneConnect Apoio Terremoto", url: "https://veneconnect.com/apoyo-terremoto" },
+      { icon: "🚚", category: "donations", name: "Tu Gruero", url: "https://tugruero.com" },
+      { icon: "🧰", category: "supplies", name: "Insumos requeridos por zona", url: "" },
+      { icon: "🍲", category: "food", name: "Refugios Venezuela", url: "https://refugiosvenezuela.com" },
+      { icon: "🏠", category: "shelters", name: "Refugios Venezuela", url: "https://refugiosvenezuela.com" },
+      { icon: "🏥", category: "patients", name: "Pacientes Terremoto VZLA", url: "https://pacientesterremotovzla.lovable.app" },
+      { icon: "🐾", category: "pets", name: "Huellas Can", url: "https://huellascan.com/terremoto" },
+      { icon: "🩺", category: "medical", name: "Nueve Once", url: "https://nueveonce.com" },
+      { icon: "🧠", category: "medical", name: "VenEmergencia", url: "https://venemergencia.com" },
+      { icon: "🌐", category: "portal", name: "Hazlo Hoy Terremoto Caracas", url: "https://hazlohoy.org/terremoto-caracas/" },
+      { icon: "💛", category: "financial", name: "Campaña de donaciones", url: "https://donate.stripe.com/eVq14m62u9BRdpm4Xw2sM02" }
+    ];
+
+    const quickAccessLinks = [
+      { label: { es: "Registrar persona desaparecida", en: "Register missing person", pt: "Registrar pessoa desaparecida" }, url: "https://desaparecidosterremotovenezuela.com" },
+      { label: { es: "Venezuela Te Busca", en: "Venezuela Te Busca", pt: "Venezuela Te Busca" }, url: "https://venezuelatebusca.com" },
+      { label: { es: "Mapa de daños", en: "Damage map", pt: "Mapa de danos" }, url: "https://terremotovenezuela.com" },
+      { label: { es: "Reportar daños", en: "Report damage", pt: "Reportar danos" }, url: "https://t.co/WImuEZ7G2G" },
+      { label: { es: "Consultar reportes", en: "View reports", pt: "Consultar reportes" }, url: "https://t.co/FPdsHbKfiH" },
+      { label: { es: "Portal de apoyo", en: "Support portal", pt: "Portal de apoio" }, url: "https://hazlohoy.org/terremoto-caracas/" },
+      { label: { es: "Hacer donación", en: "Donate", pt: "Fazer doação" }, url: "https://donate.stripe.com/eVq14m62u9BRdpm4Xw2sM02" }
+    ];
+
     const translatableNodes = document.querySelectorAll("[data-i18n]");
     const languageButtons = document.querySelectorAll(".lang-btn");
     const infoCardsContainer = document.getElementById("infoCards");
     const platformCardsContainer = document.getElementById("platformCards");
+    const quickLinksContainer = document.getElementById("quickLinks");
+    const serviceCardsContainer = document.getElementById("serviceCards");
+    const serviceSearchInput = document.getElementById("serviceSearch");
+    const categoryFilter = document.getElementById("categoryFilter");
+    const noServiceResults = document.getElementById("noServiceResults");
+    let currentLanguage = "es";
 
     function createCard({ icon, title, text, url }, buttonText) {
       const article = document.createElement("article");
@@ -557,8 +852,90 @@
       platformCardsContainer.replaceChildren(...content.platforms.map((card) => createCard(card, content.openPlatform)));
     }
 
+
+
+    function getCategoryLabel(categoryKey, language) {
+      return serviceCategories[categoryKey].labels[language] || serviceCategories[categoryKey].labels.es;
+    }
+
+    function renderQuickLinks(language) {
+      quickLinksContainer.replaceChildren(...quickAccessLinks.map((link) => {
+        const anchor = document.createElement("a");
+        anchor.className = "quick-link";
+        anchor.href = link.url;
+        anchor.target = "_blank";
+        anchor.rel = "noopener noreferrer";
+        anchor.textContent = link.label[language] || link.label.es;
+        return anchor;
+      }));
+    }
+
+    function renderCategoryOptions(language) {
+      const selectedValue = categoryFilter.value;
+      const options = [new Option(translations[language].allCategories, "all")];
+
+      Object.entries(serviceCategories).forEach(([key, category]) => {
+        options.push(new Option(category.labels[language] || category.labels.es, key));
+      });
+
+      categoryFilter.replaceChildren(...options);
+      categoryFilter.value = selectedValue && serviceCategories[selectedValue] ? selectedValue : "all";
+    }
+
+    function createServiceCard(service, language) {
+      const category = serviceCategories[service.category];
+      const categoryLabel = getCategoryLabel(service.category, language);
+      const description = serviceDescriptions[service.category][language] || serviceDescriptions[service.category].es;
+      const hasUrl = Boolean(service.url);
+      const article = document.createElement("article");
+      article.className = "card service-card";
+      article.style.setProperty("--category-color", category.color);
+
+      const statusText = hasUrl ? translations[language].activeStatus : translations[language].pendingStatus;
+      const button = hasUrl
+        ? `<a class="btn secondary" href="${service.url}" target="_blank" rel="noopener noreferrer">${translations[language].accessService}</a>`
+        : `<span class="btn disabled" aria-disabled="true">${translations[language].pendingStatus}</span>`;
+
+      article.innerHTML = `
+        <div class="service-meta">
+          <span class="icon" aria-hidden="true">${service.icon}</span>
+          <span class="status-pill ${hasUrl ? "" : "pending"}">${statusText}</span>
+        </div>
+        <span class="category-pill">${categoryLabel}</span>
+        <h3>${service.name}</h3>
+        <p>${description}</p>
+        ${button}
+      `;
+
+      return article;
+    }
+
+    function renderServiceCards(language) {
+      const searchTerm = serviceSearchInput.value.trim().toLowerCase();
+      const selectedCategory = categoryFilter.value || "all";
+
+      const filteredServices = emergencyServices.filter((service) => {
+        const categoryLabel = getCategoryLabel(service.category, language);
+        const description = serviceDescriptions[service.category][language] || serviceDescriptions[service.category].es;
+        const searchableText = `${service.name} ${categoryLabel} ${description}`.toLowerCase();
+        const matchesSearch = !searchTerm || searchableText.includes(searchTerm);
+        const matchesCategory = selectedCategory === "all" || service.category === selectedCategory;
+        return matchesSearch && matchesCategory;
+      });
+
+      serviceCardsContainer.replaceChildren(...filteredServices.map((service) => createServiceCard(service, language)));
+      noServiceResults.classList.toggle("show", filteredServices.length === 0);
+    }
+
+    function renderServiceHub(language) {
+      renderQuickLinks(language);
+      renderCategoryOptions(language);
+      renderServiceCards(language);
+    }
+
     function setLanguage(language) {
       const content = translations[language] || translations.es;
+      currentLanguage = translations[language] ? language : "es";
 
       document.documentElement.lang = content.htmlLang;
       document.title = content.pageTitle;
@@ -570,10 +947,18 @@
         }
       });
 
-      renderCards(language);
+      document.querySelectorAll("[data-i18n-placeholder]").forEach((node) => {
+        const key = node.dataset.i18nPlaceholder;
+        if (content[key]) {
+          node.setAttribute("placeholder", content[key]);
+        }
+      });
+
+      renderCards(currentLanguage);
+      renderServiceHub(currentLanguage);
 
       languageButtons.forEach((button) => {
-        const isActive = button.dataset.lang === language;
+        const isActive = button.dataset.lang === currentLanguage;
         button.classList.toggle("active", isActive);
         button.setAttribute("aria-pressed", String(isActive));
       });
@@ -582,6 +967,9 @@
     languageButtons.forEach((button) => {
       button.addEventListener("click", () => setLanguage(button.dataset.lang));
     });
+
+    serviceSearchInput.addEventListener("input", () => renderServiceCards(currentLanguage));
+    categoryFilter.addEventListener("change", () => renderServiceCards(currentLanguage));
 
     setLanguage("es");
   </script>
