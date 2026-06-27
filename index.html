@@ -386,6 +386,38 @@
 
     .services-grid {
       display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .service-category-group {
+      display: grid;
+      gap: 14px;
+      padding: 20px;
+      border-radius: 20px;
+      background: rgba(245, 247, 251, 0.72);
+      border: 1px solid rgba(0, 51, 160, 0.08);
+    }
+
+    .service-category-heading {
+      display: grid;
+      gap: 6px;
+      border-left: 6px solid var(--category-color, var(--blue));
+      padding-left: 14px;
+    }
+
+    .service-category-heading h3 {
+      color: var(--ink);
+      font-size: 1.25rem;
+      line-height: 1.25;
+    }
+
+    .service-category-heading p {
+      color: var(--muted);
+    }
+
+    .service-category-cards {
+      display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 18px;
     }
@@ -456,7 +488,7 @@
 
 
     @media (max-width: 980px) {
-      .services-grid {
+      .service-category-cards {
         grid-template-columns: repeat(2, 1fr);
       }
     }
@@ -491,7 +523,7 @@
       }
 
       .grid,
-      .services-grid,
+      .service-category-cards,
       .service-controls {
         grid-template-columns: 1fr;
       }
@@ -557,9 +589,28 @@
 
 
 
+    <section id="guides">
+      <h2 class="section-title"><span>📘</span><span data-i18n="guidesTitle">Guías y Manuales</span></h2>
+      <div class="grid">
+        <article class="card">
+          <span class="icon">🛡️</span>
+          <h3 data-i18n="manualTitle">Manual de Autoprotección de FUNVISIS</h3>
+          <p data-i18n="manualText">Material de referencia para medidas de autoprotección antes, durante y después de eventos sísmicos.</p>
+          <a class="btn" href="https://drive.google.com/file/d/1DjAg2XtNgHxXLHj2ejj_-x6Er3V-bYzA/view?usp=drive_link" target="_blank" rel="noopener noreferrer" data-i18n="openManual">Abrir manual</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="interactive-map">
+      <h2 class="section-title"><span>🗺️</span><span data-i18n="mapTitle">Mapa Interactivo</span></h2>
+      <p class="section-text" data-i18n="mapText">Consulta el mapa interactivo con información geográfica de apoyo y monitoreo. Si el mapa no carga en esta página, usa el botón de acceso directo.</p>
+      <iframe class="map-frame" title="Mapa Interactivo SOS Venezuela" src="https://www.google.com/maps/d/u/0/embed?mid=1zSmCH4fBRvda4f7R6D-mgil232eOwDU&ehbc=2E312F&ll=-10.492026162308692%2C-50.5190295&z=4" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <a class="btn secondary" href="https://www.google.com/maps/d/u/0/edit?hl=pt-BR&mid=1zSmCH4fBRvda4f7R6D-mgil232eOwDU&ll=-10.492026162308692%2C-50.5190295&z=4" target="_blank" rel="noopener noreferrer" data-i18n="openMap">Abrir mapa interactivo</a>
+    </section>
+
     <section id="service-hub">
-      <h2 class="section-title"><span>🧭</span><span data-i18n="serviceHubTitle">Central de Servicios de Emergencia</span></h2>
-      <p class="section-text" data-i18n="serviceHubText">Ante la emergencia causada por el terremoto en Venezuela, esta central reúne plataformas ciudadanas, organizaciones e iniciativas digitales para facilitar el acceso a información, reportes, donaciones, búsqueda de personas, apoyo médico, refugios, logística y ayuda humanitaria.</p>
+      <h2 class="section-title"><span>🧭</span><span data-i18n="serviceHubTitle">Plataformas de Servicios de Emergencia</span></h2>
+      <p class="section-text" data-i18n="serviceHubText">Ante la emergencia causada por el terremoto en Venezuela, esta sección reúne plataformas ciudadanas, organizaciones e iniciativas digitales para facilitar el acceso a información, reportes, donaciones, búsqueda de personas, apoyo médico, refugios, logística y ayuda humanitaria.</p>
 
       <div class="service-hub">
         <div class="quick-access">
@@ -584,30 +635,6 @@
     </section>
 
 
-    <section id="guides">
-      <h2 class="section-title"><span>📘</span><span data-i18n="guidesTitle">Guías y Manuales</span></h2>
-      <div class="grid">
-        <article class="card">
-          <span class="icon">🛡️</span>
-          <h3 data-i18n="manualTitle">Manual de Autoprotección de FUNVISIS</h3>
-          <p data-i18n="manualText">Material de referencia para medidas de autoprotección antes, durante y después de eventos sísmicos.</p>
-          <a class="btn" href="https://drive.google.com/file/d/1DjAg2XtNgHxXLHj2ejj_-x6Er3V-bYzA/view?usp=drive_link" target="_blank" rel="noopener noreferrer" data-i18n="openManual">Abrir manual</a>
-        </article>
-      </div>
-    </section>
-
-    <section id="interactive-map">
-      <h2 class="section-title"><span>🗺️</span><span data-i18n="mapTitle">Mapa Interactivo</span></h2>
-      <p class="section-text" data-i18n="mapText">Consulta el mapa interactivo con información geográfica de apoyo y monitoreo. Si el mapa no carga en esta página, usa el botón de acceso directo.</p>
-      <iframe class="map-frame" title="Mapa Interactivo SOS Venezuela" src="https://www.google.com/maps/d/u/0/embed?mid=1zSmCH4fBRvda4f7R6D-mgil232eOwDU&ehbc=2E312F&ll=-10.492026162308692%2C-50.5190295&z=4" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      <a class="btn secondary" href="https://www.google.com/maps/d/u/0/edit?hl=pt-BR&mid=1zSmCH4fBRvda4f7R6D-mgil232eOwDU&ll=-10.492026162308692%2C-50.5190295&z=4" target="_blank" rel="noopener noreferrer" data-i18n="openMap">Abrir mapa interactivo</a>
-    </section>
-
-    <section id="platforms">
-      <h2 class="section-title"><span>🤝</span><span data-i18n="platformsTitle">Plataformas incorporadas</span></h2>
-      <p class="section-text" data-i18n="platformsIntro">Accede a plataformas externas para reportes, mapas y registros de información de emergencia.</p>
-      <div class="grid" id="platformCards"></div>
-    </section>
   </main>
 
   <footer>
@@ -630,8 +657,8 @@
         objectiveText: "Esta plataforma reúne información general, guías, mapas, formularios y canales de apoyo relacionados con la emergencia causada por el terremoto en Venezuela.",
         generalTitle: "Informaciones Generales",
         generalIntro: "Encuentra recursos esenciales para orientar acciones de solidaridad, comunicación y respuesta humanitaria.",
-        serviceHubTitle: "Central de Servicios de Emergencia",
-        serviceHubText: "Ante la emergencia causada por el terremoto en Venezuela, esta central reúne plataformas ciudadanas, organizaciones e iniciativas digitales para facilitar el acceso a información, reportes, donaciones, búsqueda de personas, apoyo médico, refugios, logística y ayuda humanitaria.",
+        serviceHubTitle: "Plataformas de Servicios de Emergencia",
+        serviceHubText: "Ante la emergencia causada por el terremoto en Venezuela, esta sección reúne plataformas ciudadanas, organizaciones e iniciativas digitales para facilitar el acceso a información, reportes, donaciones, búsqueda de personas, apoyo médico, refugios, logística y ayuda humanitaria.",
         quickAccessTitle: "Accesos rápidos",
         registerInitiativeCta: "Registrar iniciativa",
         searchLabel: "Buscar por palabra clave",
@@ -640,7 +667,7 @@
         allCategories: "Todas las categorías",
         accessService: "Acceder",
         activeStatus: "Activo",
-        pendingStatus: "URL pendiente",
+        pendingStatus: "En breve",
         noResults: "No se encontraron resultados para la búsqueda o categoría seleccionada.",
         guidesTitle: "Guías y Manuales",
         manualTitle: "Manual de Autoprotección de FUNVISIS",
@@ -649,9 +676,6 @@
         mapTitle: "Mapa Interactivo",
         mapText: "Consulta el mapa interactivo con información geográfica de apoyo y monitoreo. Si el mapa no carga en esta página, usa el botón de acceso directo.",
         openMap: "Abrir mapa interactivo",
-        platformsTitle: "Plataformas incorporadas",
-        platformsIntro: "Accede a plataformas externas para reportes, mapas y registros de información de emergencia.",
-        openPlatform: "Abrir plataforma",
         footerMain: "SOS VENEZUELA — Iniciativa de la Red de Migración Unidos en Brasil.",
         footerSub: "Información, solidaridad y apoyo humanitario.",
         infoCards: [
@@ -661,11 +685,7 @@
           { icon: "📍", title: "Mapas y monitoreo", text: "Herramientas de visualización geográfica para acompañar reportes, zonas afectadas y puntos de ayuda." },
           { icon: "🛡️", title: "Guías de autoprotección", text: "Materiales prácticos para prevenir riesgos y actuar con mayor seguridad durante la emergencia." }
         ],
-        platforms: [
-          { icon: "👥", title: "Desaparecidos Terremoto Venezuela Emergencia · Sismo del 24 de junio", text: "Reconectemos a cada familia. Tras el terremoto, muchas familias siguen sin saber de los suyos. Si no logras comunicarte con alguien, repórtalo aquí. Y si ya lo encontraste, avísanos — para que su nombre dé tranquilidad, no angustia.", url: "https://desaparecidosterremotovenezuela.com/" },
-          { icon: "🗺️", title: "TerremotoVE - MAPA", text: "Mapa de datos para visualizar reportes y puntos relevantes de la emergencia.", url: "https://kf.kobotoolbox.org/#/forms/a8XWDsdUcpBzXGtgQmiiro/data/map" },
-          { icon: "📋", title: "TerremotoVE - CADASTRO", text: "Formulario de registro para recopilar información y necesidades relacionadas con la emergencia.", url: "https://ee.kobotoolbox.org/x/eaEmQ9YW" }
-        ]
+
       },
       en: {
         htmlLang: "en",
@@ -677,8 +697,8 @@
         objectiveText: "This platform brings together general information, guides, maps, forms, and support channels related to the emergency caused by the earthquake in Venezuela.",
         generalTitle: "General Information",
         generalIntro: "Find essential resources to guide solidarity, communication, and humanitarian response actions.",
-        serviceHubTitle: "Emergency Services Hub",
-        serviceHubText: "In response to the emergency caused by the earthquake in Venezuela, this hub brings together citizen platforms, organizations and digital initiatives to facilitate access to information, reports, donations, missing persons search, medical support, shelters, logistics and humanitarian aid.",
+        serviceHubTitle: "Emergency Service Platforms",
+        serviceHubText: "In response to the emergency caused by the earthquake in Venezuela, this section brings together citizen platforms, organizations and digital initiatives to facilitate access to information, reports, donations, missing persons search, medical support, shelters, logistics and humanitarian aid.",
         quickAccessTitle: "Quick access",
         registerInitiativeCta: "Register initiative",
         searchLabel: "Search by keyword",
@@ -687,7 +707,7 @@
         allCategories: "All categories",
         accessService: "Access",
         activeStatus: "Active",
-        pendingStatus: "URL pending",
+        pendingStatus: "Coming soon",
         noResults: "No results were found for the selected search or category.",
         guidesTitle: "Guides and Manuals",
         manualTitle: "FUNVISIS Self-Protection Manual",
@@ -696,9 +716,6 @@
         mapTitle: "Interactive Map",
         mapText: "View the interactive map with geographic information for support and monitoring. If the map does not load on this page, use the direct access button.",
         openMap: "Open interactive map",
-        platformsTitle: "Embedded platforms",
-        platformsIntro: "Access external platforms for reports, maps, and emergency information records.",
-        openPlatform: "Open platform",
         footerMain: "SOS VENEZUELA — An initiative of Red de Migración Unidos en Brasil.",
         footerSub: "Information, solidarity, and humanitarian support.",
         infoCards: [
@@ -708,11 +725,7 @@
           { icon: "📍", title: "Maps and monitoring", text: "Geographic visualization tools to follow reports, affected areas, and aid points." },
           { icon: "🛡️", title: "Self-protection guides", text: "Practical materials to prevent risks and act more safely during the emergency." }
         ],
-        platforms: [
-          { icon: "👥", title: "Missing People Venezuela Earthquake Emergency · June 24 Earthquake", text: "Let us reconnect every family. After the earthquake, many families still do not know about their loved ones. If you cannot communicate with someone, report it here. And if you have already found them, let us know — so their name brings calm, not anguish.", url: "https://desaparecidosterremotovenezuela.com/" },
-          { icon: "🗺️", title: "TerremotoVE - MAP", text: "Data map to view reports and relevant emergency points.", url: "https://kf.kobotoolbox.org/#/forms/a8XWDsdUcpBzXGtgQmiiro/data/map" },
-          { icon: "📋", title: "TerremotoVE - REGISTRATION", text: "Registration form to collect information and needs related to the emergency.", url: "https://ee.kobotoolbox.org/x/eaEmQ9YW" }
-        ]
+
       },
       pt: {
         htmlLang: "pt-BR",
@@ -724,8 +737,8 @@
         objectiveText: "Esta plataforma reúne informações gerais, guias, mapas, formulários e canais de apoio relacionados à emergência causada pelo terremoto na Venezuela.",
         generalTitle: "Informações Gerais",
         generalIntro: "Encontre recursos essenciais para orientar ações de solidariedade, comunicação e resposta humanitária.",
-        serviceHubTitle: "Central de Serviços de Emergência",
-        serviceHubText: "Diante da emergência causada pelo terremoto na Venezuela, esta central reúne plataformas cidadãs, organizações e iniciativas digitais para facilitar o acesso à informação, registros, doações, busca de pessoas, apoio médico, abrigos, logística e ajuda humanitária.",
+        serviceHubTitle: "Plataformas de Serviços de Emergência",
+        serviceHubText: "Diante da emergência causada pelo terremoto na Venezuela, esta seção reúne plataformas cidadãs, organizações e iniciativas digitais para facilitar o acesso à informação, registros, doações, busca de pessoas, apoio médico, abrigos, logística e ajuda humanitária.",
         quickAccessTitle: "Acessos rápidos",
         registerInitiativeCta: "Cadastrar iniciativa",
         searchLabel: "Buscar por palavra-chave",
@@ -734,7 +747,7 @@
         allCategories: "Todas as categorias",
         accessService: "Acessar",
         activeStatus: "Ativo",
-        pendingStatus: "URL pendente",
+        pendingStatus: "Em breve",
         noResults: "Nenhum resultado foi encontrado para a busca ou categoria selecionada.",
         guidesTitle: "Guias e Manuais",
         manualTitle: "Manual de Autoprotección de FUNVISIS",
@@ -743,9 +756,6 @@
         mapTitle: "Mapa Interativo",
         mapText: "Consulte o mapa interativo com informações geográficas de apoio e monitoramento. Se o mapa não carregar nesta página, use o botão de acesso direto.",
         openMap: "Abrir mapa interativo",
-        platformsTitle: "Plataformas incorporadas",
-        platformsIntro: "Acesse plataformas externas para relatórios, mapas e registros de informações de emergência.",
-        openPlatform: "Abrir plataforma",
         footerMain: "SOS VENEZUELA — Iniciativa da Red de Migración Unidos en Brasil.",
         footerSub: "Informação, solidariedade e apoio humanitário.",
         infoCards: [
@@ -755,11 +765,7 @@
           { icon: "📍", title: "Mapas e monitoramento", text: "Ferramentas de visualização geográfica para acompanhar relatos, áreas afetadas e pontos de ajuda." },
           { icon: "🛡️", title: "Guias de autoproteção", text: "Materiais práticos para prevenir riscos e agir com mais segurança durante a emergência." }
         ],
-        platforms: [
-          { icon: "👥", title: "Desaparecidos Terremoto Venezuela Emergência · Sismo de 24 de junho", text: "Reconectemos cada família. Após o terremoto, muitas famílias ainda não sabem notícias dos seus. Se você não consegue se comunicar com alguém, reporte aqui. E se já encontrou a pessoa, avise-nos — para que seu nome traga tranquilidade, não angústia.", url: "https://desaparecidosterremotovenezuela.com/" },
-          { icon: "🗺️", title: "TerremotoVE - MAPA", text: "Mapa de dados para visualizar relatos e pontos relevantes da emergência.", url: "https://kf.kobotoolbox.org/#/forms/a8XWDsdUcpBzXGtgQmiiro/data/map" },
-          { icon: "📋", title: "TerremotoVE - CADASTRO", text: "Formulário de cadastro para coletar informações e necessidades relacionadas à emergência.", url: "https://ee.kobotoolbox.org/x/eaEmQ9YW" }
-        ]
+
       }
     };
 
@@ -768,35 +774,35 @@
     const serviceCategories = {
       missing: { color: "#d71920", labels: { es: "Personas desaparecidas", en: "Missing persons", pt: "Pessoas desaparecidas" } },
       damage: { color: "#f97316", labels: { es: "Reporte de daños estructurales", en: "Structural damage reports", pt: "Reporte de danos estruturais" } },
-      rescue: { color: "#0033a0", labels: { es: "Rescate presencial y emergencia", en: "On-site rescue and emergency", pt: "Resgate presencial e emergência" } },
+      rescue: { color: "#0033a0", labels: { es: "Rescate y emergencia", en: "Rescue and emergency", pt: "Resgate e emergência" } },
       habitability: { color: "#7c3aed", labels: { es: "Inspección de habitabilidad", en: "Habitability inspection", pt: "Inspeção de habitabilidade" } },
       donations: { color: "#16a34a", labels: { es: "Centros de acopio y donaciones", en: "Collection centers and donations", pt: "Centros de acopio e doações" } },
-      supplies: { color: "#8a5a00", labels: { es: "Insumos requeridos por zona", en: "Supplies required by area", pt: "Insumos requeridos por zona" } },
-      food: { color: "#ca8a04", labels: { es: "Centros de alimentación", en: "Food centers", pt: "Centros de alimentação" } },
+      food: { color: "#ca8a04", labels: { es: "Alimentación", en: "Food assistance", pt: "Alimentação" } },
       shelters: { color: "#0891b2", labels: { es: "Refugios y alojamiento", en: "Shelters and accommodation", pt: "Refúgios e alojamento" } },
       patients: { color: "#dc2626", labels: { es: "Pacientes en hospitales", en: "Hospital patients", pt: "Pacientes em hospitais" } },
-      pets: { color: "#9333ea", labels: { es: "Información de mascotas", en: "Pet information", pt: "Informação de mascotas" } },
+      pets: { color: "#9333ea", labels: { es: "Mascotas", en: "Pets", pt: "Mascotes" } },
       medical: { color: "#0f766e", labels: { es: "Apoyo médico y psicológico", en: "Medical and psychological support", pt: "Apoio médico e psicológico" } },
-      portal: { color: "#2563eb", labels: { es: "Portal integrador de iniciativas", en: "Initiatives integration portal", pt: "Portal integrador de iniciativas" } },
-      financial: { color: "#15803d", labels: { es: "Donaciones", en: "Donations", pt: "Doações" } },
-      initiative: { color: "#db2777", labels: { es: "Registro de iniciativas", en: "Initiative registration", pt: "Cadastro de iniciativas" } }
+      logistics: { color: "#0ea5e9", labels: { es: "Logística y transporte", en: "Logistics and transport", pt: "Logística e transporte" } },
+      initiative: { color: "#db2777", labels: { es: "Registro de iniciativas", en: "Initiative registration", pt: "Cadastro de iniciativas" } },
+      portal: { color: "#2563eb", labels: { es: "Portal integrador", en: "Integration portal", pt: "Portal integrador" } },
+      financial: { color: "#15803d", labels: { es: "Donaciones", en: "Donations", pt: "Doações" } }
     };
 
     const serviceDescriptions = {
       missing: { es: "Registro, búsqueda y consulta de personas desaparecidas o localizadas después del terremoto.", en: "Registration, search and consultation for people missing or located after the earthquake.", pt: "Registro, busca e consulta de pessoas desaparecidas ou localizadas após o terremoto." },
-      damage: { es: "Registro, consulta y visualización de daños estructurales causados por el terremoto.", en: "Registration, consultation and visualization of structural damage caused by the earthquake.", pt: "Registro, consulta e visualização de danos estruturais causados pelo terremoto." },
-      rescue: { es: "Apoyo presencial, coordinación de rescate, logística y transporte humanitario.", en: "On-site support, rescue coordination, logistics and humanitarian transport.", pt: "Apoio presencial, coordenação de resgate, logística e transporte humanitário." },
+      damage: { es: "Registro, consulta, mapas y visualización de daños estructurales causados por el terremoto.", en: "Registration, consultation, maps and visualization of structural damage caused by the earthquake.", pt: "Registro, consulta, mapas e visualização de danos estruturais causados pelo terremoto." },
+      rescue: { es: "Canales para rescate, emergencia y apoyo presencial inmediato.", en: "Channels for rescue, emergency and immediate on-site support.", pt: "Canais para resgate, emergência e apoio presencial imediato." },
       habitability: { es: "Registro de ingenieros y apoyo para inspección de habitabilidad de edificaciones.", en: "Engineer registration and support for building habitability inspections.", pt: "Cadastro de engenheiros e apoio para inspeção de habitabilidade de edificações." },
-      donations: { es: "Centros de acopio, donaciones, transporte y apoyo logístico.", en: "Collection centers, donations, transport and logistics support.", pt: "Centros de arrecadação, doações, transporte e apoio logístico." },
-      supplies: { es: "Espacio reservado para futuras informaciones sobre insumos requeridos por región.", en: "Reserved space for future information about supplies required by region.", pt: "Espaço reservado para futuras informações sobre insumos requeridos por região." },
+      donations: { es: "Centros de acopio, recolección de insumos y donaciones materiales.", en: "Collection centers, supply gathering and material donations.", pt: "Centros de acopio, arrecadação de insumos e doações materiais." },
       food: { es: "Información sobre puntos de alimentación comunitaria.", en: "Information about community food distribution points.", pt: "Informações sobre pontos de alimentação comunitária." },
       shelters: { es: "Información sobre refugios, albergues y alojamientos temporales.", en: "Information about shelters, refuge spaces and temporary accommodation.", pt: "Informações sobre refúgios, abrigos e alojamentos temporários." },
       patients: { es: "Consulta y registro de pacientes hospitalizados después del terremoto.", en: "Search and registration for patients hospitalized after the earthquake.", pt: "Consulta e registro de pacientes hospitalizados após o terremoto." },
       pets: { es: "Información sobre animales perdidos, encontrados o rescatados.", en: "Information about lost, found or rescued animals.", pt: "Informações sobre animais perdidos, encontrados ou resgatados." },
       medical: { es: "Canales de apoyo médico, psicológico y emergencial.", en: "Medical, psychological and emergency support channels.", pt: "Canais de apoio médico, psicológico e emergencial." },
-      portal: { es: "Portal que reúne iniciativas de la sociedad civil para donaciones, voluntariado, personas desaparecidas, daños y apoyo humanitario.", en: "Portal that brings together civil society initiatives for donations, volunteering, missing persons, damage and humanitarian support.", pt: "Portal que reúne iniciativas da sociedade civil para doações, voluntariado, pessoas desaparecidas, danos e apoio humanitário." },
-      financial: { es: "Canal para contribución financiera en apoyo a las personas afectadas.", en: "Channel for financial contributions to support affected people.", pt: "Canal para contribuição financeira em apoio às pessoas afetadas." },
-      initiative: { es: "Registra organizaciones, acciones solidarias, servicios, puntos de apoyo, voluntariado u otras iniciativas relacionadas con la respuesta al terremoto.", en: "Register organizations, solidarity actions, services, support points, volunteering or other initiatives related to the earthquake response.", pt: "Cadastre organizações, ações solidárias, serviços, pontos de apoio, voluntariado ou outras iniciativas relacionadas à resposta ao terremoto." }
+      logistics: { es: "Apoyo para traslado, transporte y coordinación logística humanitaria.", en: "Support for relocation, transport and humanitarian logistics coordination.", pt: "Apoio para deslocamento, transporte e coordenação logística humanitária." },
+      initiative: { es: "Registro de organizaciones, acciones solidarias, servicios, puntos de apoyo y voluntariado.", en: "Registration for organizations, solidarity actions, services, support points and volunteering.", pt: "Cadastro de organizações, ações solidárias, serviços, pontos de apoio e voluntariado." },
+      portal: { es: "Portal que integra iniciativas y recursos de respuesta humanitaria.", en: "Portal integrating humanitarian response initiatives and resources.", pt: "Portal que integra iniciativas e recursos de resposta humanitária." },
+      financial: { es: "Canales para contribuciones financieras en apoyo a las personas afectadas.", en: "Channels for financial contributions to support affected people.", pt: "Canais para contribuições financeiras em apoio às pessoas afetadas." }
     };
 
     const emergencyServices = [
@@ -810,17 +816,19 @@
       },
       { icon: "🔎", category: "missing", name: "Venezuela Reporta", url: "https://venezuelareporta.org" },
       { icon: "🔎", category: "missing", name: "Venezuela Te Busca", url: "https://venezuelatebusca.com" },
-      { icon: "👥", category: "missing", name: "Desaparecidos Terremoto Venezuela", url: "https://desaparecidosterremotovenezuela.com" },
+      { icon: "👥", category: "missing", name: "Desaparecidos Terremoto Venezuela", url: "https://desaparecidosterremotovenezuela.com/" },
       { icon: "🏚️", category: "damage", name: "Enlace para agregar información de daños", url: "https://t.co/WImuEZ7G2G" },
       { icon: "📊", category: "damage", name: "Consultar reportes registrados", url: "https://t.co/FPdsHbKfiH" },
       { icon: "🗺️", category: "damage", name: "Terremoto Venezuela", url: "https://terremotovenezuela.com" },
+      { icon: "🗺️", category: "damage", name: "TerremotoVE - MAPA", url: "https://kf.kobotoolbox.org/#/forms/a8XWDsdUcpBzXGtgQmiiro/data/map", keywords: "mapa maps daños estructurales reporte" },
+      { icon: "📋", category: "damage", name: "TerremotoVE - CADASTRO", url: "https://ee.kobotoolbox.org/x/eaEmQ9YW", keywords: "cadastro registro daños estructurales reporte formulario" },
       { icon: "📱", category: "damage", name: "Tilin App", url: "https://tilinapp.com" },
       { icon: "🚑", category: "rescue", name: "Rescate VE", url: "https://rescate-ve.vercel.app" },
       { icon: "🏗️", category: "habitability", name: "Habitable", url: "https://habitable.lovable.app" },
       { icon: "📦", category: "donations", name: "Ayuda para Venezuela", url: "https://ayudaparavenezuela.com" },
       { icon: "🤝", category: "donations", name: "VeneConnect Apoio Terremoto", url: "https://veneconnect.com/apoyo-terremoto" },
-      { icon: "🚚", category: "donations", name: "Tu Gruero", url: "https://tugruero.com" },
-      { icon: "🧰", category: "supplies", name: "Insumos requeridos por zona", url: "" },
+      { icon: "🚚", category: "logistics", name: "Tu Gruero", url: "https://tugruero.com" },
+      { icon: "🧰", category: "donations", name: "Insumos requeridos por zona", url: "" },
       { icon: "🍲", category: "food", name: "Refugios Venezuela", url: "https://refugiosvenezuela.com" },
       { icon: "🏠", category: "shelters", name: "Refugios Venezuela", url: "https://refugiosvenezuela.com" },
       { icon: "🏥", category: "patients", name: "Pacientes Terremoto VZLA", url: "https://pacientesterremotovzla.lovable.app" },
@@ -844,7 +852,6 @@
     const translatableNodes = document.querySelectorAll("[data-i18n]");
     const languageButtons = document.querySelectorAll(".lang-btn");
     const infoCardsContainer = document.getElementById("infoCards");
-    const platformCardsContainer = document.getElementById("platformCards");
     const quickLinksContainer = document.getElementById("quickLinks");
     const serviceCardsContainer = document.getElementById("serviceCards");
     const serviceSearchInput = document.getElementById("serviceSearch");
@@ -873,7 +880,6 @@
     function renderCards(language) {
       const content = translations[language];
       infoCardsContainer.replaceChildren(...content.infoCards.map((card) => createCard(card)));
-      platformCardsContainer.replaceChildren(...content.platforms.map((card) => createCard(card, content.openPlatform)));
     }
 
 
@@ -951,7 +957,31 @@
         return matchesSearch && matchesCategory;
       });
 
-      serviceCardsContainer.replaceChildren(...filteredServices.map((service) => createServiceCard(service, language)));
+      const groups = Object.keys(serviceCategories).map((categoryKey) => {
+        const services = filteredServices.filter((service) => service.category === categoryKey);
+        if (!services.length) return null;
+
+        const category = serviceCategories[categoryKey];
+        const group = document.createElement("div");
+        group.className = "service-category-group";
+        group.style.setProperty("--category-color", category.color);
+
+        const heading = document.createElement("div");
+        heading.className = "service-category-heading";
+        heading.innerHTML = `
+          <h3>${getCategoryLabel(categoryKey, language)}</h3>
+          <p>${serviceDescriptions[categoryKey][language] || serviceDescriptions[categoryKey].es}</p>
+        `;
+
+        const cards = document.createElement("div");
+        cards.className = "service-category-cards";
+        cards.replaceChildren(...services.map((service) => createServiceCard(service, language)));
+
+        group.append(heading, cards);
+        return group;
+      }).filter(Boolean);
+
+      serviceCardsContainer.replaceChildren(...groups);
       noServiceResults.classList.toggle("show", filteredServices.length === 0);
     }
 
