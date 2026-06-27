@@ -387,33 +387,90 @@
     .services-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 24px;
+      gap: 14px;
     }
 
     .service-category-group {
-      display: grid;
-      gap: 14px;
-      padding: 20px;
+      overflow: hidden;
       border-radius: 20px;
       background: rgba(245, 247, 251, 0.72);
       border: 1px solid rgba(0, 51, 160, 0.08);
+      box-shadow: 0 10px 24px rgba(23, 32, 51, 0.06);
     }
 
-    .service-category-heading {
+    .service-category-toggle {
       display: grid;
-      gap: 6px;
-      border-left: 6px solid var(--category-color, var(--blue));
-      padding-left: 14px;
+      grid-template-columns: auto 1fr auto;
+      gap: 14px;
+      align-items: center;
+      width: 100%;
+      padding: 18px 20px;
+      border: 0;
+      border-left: 7px solid var(--category-color, var(--blue));
+      color: var(--ink);
+      background: var(--white);
+      cursor: pointer;
+      font: inherit;
+      text-align: left;
+      transition: background 0.2s ease, transform 0.2s ease;
     }
 
-    .service-category-heading h3 {
+    .service-category-toggle:hover,
+    .service-category-toggle:focus-visible {
+      background: color-mix(in srgb, var(--category-color, var(--blue)) 8%, white);
+      outline: none;
+    }
+
+    .service-category-toggle:focus-visible {
+      box-shadow: inset 0 0 0 4px rgba(0, 51, 160, 0.12);
+    }
+
+    .service-category-icon {
+      display: inline-grid;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      border-radius: 15px;
+      font-size: 1.35rem;
+      background: color-mix(in srgb, var(--category-color, var(--blue)) 14%, white);
+    }
+
+    .service-category-title {
+      display: grid;
+      gap: 4px;
+    }
+
+    .service-category-title strong {
       color: var(--ink);
-      font-size: 1.25rem;
+      font-size: 1.14rem;
       line-height: 1.25;
     }
 
-    .service-category-heading p {
+    .service-category-title span {
       color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .accordion-arrow {
+      color: var(--category-color, var(--blue));
+      font-size: 1.25rem;
+      font-weight: 900;
+      transition: transform 0.25s ease;
+    }
+
+    .service-category-group.open .accordion-arrow {
+      transform: rotate(90deg);
+    }
+
+    .service-category-panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.32s ease;
+    }
+
+    .service-category-panel-inner {
+      padding: 18px 20px 22px;
+      border-top: 1px solid rgba(0, 51, 160, 0.08);
     }
 
     .service-category-cards {
@@ -526,6 +583,11 @@
       .service-category-cards,
       .service-controls {
         grid-template-columns: 1fr;
+      }
+
+      .service-category-toggle {
+        min-height: 74px;
+        padding: 18px;
       }
 
       .quick-link {
@@ -665,7 +727,7 @@
         searchPlaceholder: "Buscar plataforma, categoría o descripción",
         categoryLabel: "Filtrar por categoría",
         allCategories: "Todas las categorías",
-        accessService: "Acceder",
+        accessService: "Acceder plataforma",
         activeStatus: "Activo",
         pendingStatus: "En breve",
         noResults: "No se encontraron resultados para la búsqueda o categoría seleccionada.",
@@ -705,7 +767,7 @@
         searchPlaceholder: "Search platform, category or description",
         categoryLabel: "Filter by category",
         allCategories: "All categories",
-        accessService: "Access",
+        accessService: "Access platform",
         activeStatus: "Active",
         pendingStatus: "Coming soon",
         noResults: "No results were found for the selected search or category.",
@@ -745,7 +807,7 @@
         searchPlaceholder: "Buscar plataforma, categoria ou descrição",
         categoryLabel: "Filtrar por categoria",
         allCategories: "Todas as categorias",
-        accessService: "Acessar",
+        accessService: "Acessar plataforma",
         activeStatus: "Ativo",
         pendingStatus: "Em breve",
         noResults: "Nenhum resultado foi encontrado para a busca ou categoria selecionada.",
@@ -772,20 +834,20 @@
 
 
     const serviceCategories = {
-      missing: { color: "#d71920", labels: { es: "Personas desaparecidas", en: "Missing persons", pt: "Pessoas desaparecidas" } },
-      damage: { color: "#f97316", labels: { es: "Reporte de daños estructurales", en: "Structural damage reports", pt: "Reporte de danos estruturais" } },
-      rescue: { color: "#0033a0", labels: { es: "Rescate y emergencia", en: "Rescue and emergency", pt: "Resgate e emergência" } },
-      habitability: { color: "#7c3aed", labels: { es: "Inspección de habitabilidad", en: "Habitability inspection", pt: "Inspeção de habitabilidade" } },
-      donations: { color: "#16a34a", labels: { es: "Centros de acopio y donaciones", en: "Collection centers and donations", pt: "Centros de acopio e doações" } },
-      food: { color: "#ca8a04", labels: { es: "Alimentación", en: "Food assistance", pt: "Alimentação" } },
-      shelters: { color: "#0891b2", labels: { es: "Refugios y alojamiento", en: "Shelters and accommodation", pt: "Refúgios e alojamento" } },
-      patients: { color: "#dc2626", labels: { es: "Pacientes en hospitales", en: "Hospital patients", pt: "Pacientes em hospitais" } },
-      pets: { color: "#9333ea", labels: { es: "Mascotas", en: "Pets", pt: "Mascotes" } },
-      medical: { color: "#0f766e", labels: { es: "Apoyo médico y psicológico", en: "Medical and psychological support", pt: "Apoio médico e psicológico" } },
-      logistics: { color: "#0ea5e9", labels: { es: "Logística y transporte", en: "Logistics and transport", pt: "Logística e transporte" } },
-      initiative: { color: "#db2777", labels: { es: "Registro de iniciativas", en: "Initiative registration", pt: "Cadastro de iniciativas" } },
-      portal: { color: "#2563eb", labels: { es: "Portal integrador", en: "Integration portal", pt: "Portal integrador" } },
-      financial: { color: "#15803d", labels: { es: "Donaciones", en: "Donations", pt: "Doações" } }
+      missing: { icon: "🔎", color: "#d71920", labels: { es: "Personas desaparecidas", en: "Missing persons", pt: "Pessoas desaparecidas" } },
+      damage: { icon: "🏚️", color: "#f97316", labels: { es: "Reporte de daños estructurales", en: "Structural damage reports", pt: "Reporte de danos estruturais" } },
+      rescue: { icon: "🚑", color: "#0033a0", labels: { es: "Rescate y emergencia", en: "Rescue and emergency", pt: "Resgate e emergência" } },
+      habitability: { icon: "🏗️", color: "#7c3aed", labels: { es: "Inspección de habitabilidad", en: "Habitability inspection", pt: "Inspeção de habitabilidade" } },
+      donations: { icon: "📦", color: "#16a34a", labels: { es: "Centros de acopio y donaciones", en: "Collection centers and donations", pt: "Centros de acopio e doações" } },
+      food: { icon: "🍲", color: "#ca8a04", labels: { es: "Alimentación", en: "Food assistance", pt: "Alimentação" } },
+      shelters: { icon: "🏠", color: "#0891b2", labels: { es: "Refugios y alojamiento", en: "Shelters and accommodation", pt: "Refúgios e alojamento" } },
+      patients: { icon: "🏥", color: "#dc2626", labels: { es: "Pacientes en hospitales", en: "Hospital patients", pt: "Pacientes em hospitais" } },
+      pets: { icon: "🐾", color: "#9333ea", labels: { es: "Mascotas", en: "Pets", pt: "Mascotes" } },
+      logistics: { icon: "🚚", color: "#0ea5e9", labels: { es: "Logística y transporte", en: "Logistics and transport", pt: "Logística e transporte" } },
+      medical: { icon: "🩺", color: "#0f766e", labels: { es: "Apoyo médico y psicológico", en: "Medical and psychological support", pt: "Apoio médico e psicológico" } },
+      initiative: { icon: "📝", color: "#db2777", labels: { es: "Registro de iniciativas", en: "Initiative registration", pt: "Cadastro de iniciativas" } },
+      portal: { icon: "🌐", color: "#2563eb", labels: { es: "Portal integrador", en: "Integration portal", pt: "Portal integrador" } },
+      financial: { icon: "💛", color: "#15803d", labels: { es: "Donaciones", en: "Donations", pt: "Doações" } }
     };
 
     const serviceDescriptions = {
@@ -806,6 +868,27 @@
     };
 
     const emergencyServices = [
+      { icon: "🔎", category: "missing", name: "Venezuela Reporta", url: "https://venezuelareporta.org" },
+      { icon: "🔎", category: "missing", name: "Venezuela Te Busca", url: "https://venezuelatebusca.com" },
+      { icon: "👥", category: "missing", name: "Desaparecidos Terremoto Venezuela", url: "https://desaparecidosterremotovenezuela.com/" },
+      { icon: "🏚️", category: "damage", name: { es: "Reportar daños", en: "Report damage", pt: "Reportar danos" }, url: "https://t.co/WImuEZ7G2G" },
+      { icon: "📊", category: "damage", name: { es: "Consultar reportes", en: "View reports", pt: "Consultar reportes" }, url: "https://t.co/FPdsHbKfiH" },
+      { icon: "🗺️", category: "damage", name: "Terremoto Venezuela", url: "https://terremotovenezuela.com" },
+      { icon: "🗺️", category: "damage", name: { es: "TerremotoVE - Mapa", en: "TerremotoVE - Map", pt: "TerremotoVE - Mapa" }, url: "https://kf.kobotoolbox.org/#/forms/a8XWDsdUcpBzXGtgQmiiro/data/map", keywords: "mapa maps daños estructurales reporte" },
+      { icon: "📋", category: "damage", name: { es: "TerremotoVE - Cadastro", en: "TerremotoVE - Registration", pt: "TerremotoVE - Cadastro" }, url: "https://ee.kobotoolbox.org/x/eaEmQ9YW", keywords: "cadastro registro daños estructurales reporte formulario" },
+      { icon: "📱", category: "damage", name: "Tilin App", url: "https://tilinapp.com" },
+      { icon: "🚑", category: "rescue", name: "Rescate VE", url: "https://rescate-ve.vercel.app" },
+      { icon: "🏗️", category: "habitability", name: "Habitable", url: "https://habitable.lovable.app" },
+      { icon: "📦", category: "donations", name: "Ayuda para Venezuela", url: "https://ayudaparavenezuela.com" },
+      { icon: "🤝", category: "donations", name: "VeneConnect", url: "https://veneconnect.com/apoyo-terremoto" },
+      { icon: "🚚", category: "donations", name: "Tu Gruero", url: "https://tugruero.com" },
+      { icon: "🍲", category: "food", name: "Refugios Venezuela", url: "https://refugiosvenezuela.com" },
+      { icon: "🏠", category: "shelters", name: "Refugios Venezuela", url: "https://refugiosvenezuela.com" },
+      { icon: "🏥", category: "patients", name: "Pacientes Terremoto VZLA", url: "https://pacientesterremotovzla.lovable.app" },
+      { icon: "🐾", category: "pets", name: "Huellas Can", url: "https://huellascan.com/terremoto" },
+      { icon: "🚑", category: "logistics", name: "Rescate VE", url: "https://rescate-ve.vercel.app" },
+      { icon: "🩺", category: "medical", name: "Nueve Once", url: "https://nueveonce.com" },
+      { icon: "🧠", category: "medical", name: "VenEmergencia", url: "https://venemergencia.com" },
       {
         icon: "📝",
         category: "initiative",
@@ -814,29 +897,8 @@
         buttonLabel: { es: "Completar formulario", en: "Fill out form", pt: "Preencher formulário" },
         keywords: "iniciativa cadastro apoyo apoio voluntariado organización organizacion organizações organization support registro cadastrar servicios serviços formulario"
       },
-      { icon: "🔎", category: "missing", name: "Venezuela Reporta", url: "https://venezuelareporta.org" },
-      { icon: "🔎", category: "missing", name: "Venezuela Te Busca", url: "https://venezuelatebusca.com" },
-      { icon: "👥", category: "missing", name: "Desaparecidos Terremoto Venezuela", url: "https://desaparecidosterremotovenezuela.com/" },
-      { icon: "🏚️", category: "damage", name: "Enlace para agregar información de daños", url: "https://t.co/WImuEZ7G2G" },
-      { icon: "📊", category: "damage", name: "Consultar reportes registrados", url: "https://t.co/FPdsHbKfiH" },
-      { icon: "🗺️", category: "damage", name: "Terremoto Venezuela", url: "https://terremotovenezuela.com" },
-      { icon: "🗺️", category: "damage", name: "TerremotoVE - MAPA", url: "https://kf.kobotoolbox.org/#/forms/a8XWDsdUcpBzXGtgQmiiro/data/map", keywords: "mapa maps daños estructurales reporte" },
-      { icon: "📋", category: "damage", name: "TerremotoVE - CADASTRO", url: "https://ee.kobotoolbox.org/x/eaEmQ9YW", keywords: "cadastro registro daños estructurales reporte formulario" },
-      { icon: "📱", category: "damage", name: "Tilin App", url: "https://tilinapp.com" },
-      { icon: "🚑", category: "rescue", name: "Rescate VE", url: "https://rescate-ve.vercel.app" },
-      { icon: "🏗️", category: "habitability", name: "Habitable", url: "https://habitable.lovable.app" },
-      { icon: "📦", category: "donations", name: "Ayuda para Venezuela", url: "https://ayudaparavenezuela.com" },
-      { icon: "🤝", category: "donations", name: "VeneConnect Apoio Terremoto", url: "https://veneconnect.com/apoyo-terremoto" },
-      { icon: "🚚", category: "logistics", name: "Tu Gruero", url: "https://tugruero.com" },
-      { icon: "🧰", category: "donations", name: "Insumos requeridos por zona", url: "" },
-      { icon: "🍲", category: "food", name: "Refugios Venezuela", url: "https://refugiosvenezuela.com" },
-      { icon: "🏠", category: "shelters", name: "Refugios Venezuela", url: "https://refugiosvenezuela.com" },
-      { icon: "🏥", category: "patients", name: "Pacientes Terremoto VZLA", url: "https://pacientesterremotovzla.lovable.app" },
-      { icon: "🐾", category: "pets", name: "Huellas Can", url: "https://huellascan.com/terremoto" },
-      { icon: "🩺", category: "medical", name: "Nueve Once", url: "https://nueveonce.com" },
-      { icon: "🧠", category: "medical", name: "VenEmergencia", url: "https://venemergencia.com" },
-      { icon: "🌐", category: "portal", name: "Hazlo Hoy Terremoto Caracas", url: "https://hazlohoy.org/terremoto-caracas/" },
-      { icon: "💛", category: "financial", name: "Campaña de donaciones", url: "https://donate.stripe.com/eVq14m62u9BRdpm4Xw2sM02" }
+      { icon: "🌐", category: "portal", name: "Hazlo Hoy", url: "https://hazlohoy.org/terremoto-caracas/" },
+      { icon: "💛", category: "financial", name: "Stripe Donations", url: "https://donate.stripe.com/eVq14m62u9BRdpm4Xw2sM02" }
     ];
 
     const quickAccessLinks = [
@@ -858,6 +920,7 @@
     const categoryFilter = document.getElementById("categoryFilter");
     const noServiceResults = document.getElementById("noServiceResults");
     let currentLanguage = "es";
+    let openCategoryKey = null;
 
     function createCard({ icon, title, text, url }, buttonText) {
       const article = document.createElement("article");
@@ -942,11 +1005,39 @@
       return article;
     }
 
-    function renderServiceCards(language) {
+    function setAccordionPanelState(group, isOpen) {
+      const button = group.querySelector(".service-category-toggle");
+      const panel = group.querySelector(".service-category-panel");
+      group.classList.toggle("open", isOpen);
+      button.setAttribute("aria-expanded", String(isOpen));
+      panel.style.maxHeight = isOpen ? `${panel.scrollHeight}px` : "0px";
+    }
+
+    function closeOtherAccordions(activeGroup) {
+      serviceCardsContainer.querySelectorAll(".service-category-group.open").forEach((group) => {
+        if (group !== activeGroup) {
+          setAccordionPanelState(group, false);
+        }
+      });
+    }
+
+    function bindAccordionEvents() {
+      serviceCardsContainer.querySelectorAll(".service-category-toggle").forEach((button) => {
+        button.addEventListener("click", () => {
+          const group = button.closest(".service-category-group");
+          const isOpening = !group.classList.contains("open");
+          closeOtherAccordions(group);
+          setAccordionPanelState(group, isOpening);
+          openCategoryKey = isOpening ? group.dataset.category : null;
+        });
+      });
+    }
+
+    function getFilteredServices(language) {
       const searchTerm = serviceSearchInput.value.trim().toLowerCase();
       const selectedCategory = categoryFilter.value || "all";
 
-      const filteredServices = emergencyServices.filter((service) => {
+      return emergencyServices.filter((service) => {
         const categoryLabel = getCategoryLabel(service.category, language);
         const description = service.description?.[language] || serviceDescriptions[service.category][language] || serviceDescriptions[service.category].es;
         const serviceName = typeof service.name === "string" ? service.name : (service.name[language] || service.name.es);
@@ -956,32 +1047,80 @@
         const matchesCategory = selectedCategory === "all" || service.category === selectedCategory;
         return matchesSearch && matchesCategory;
       });
+    }
+
+    function getCategoryToOpen(filteredServices) {
+      const searchTerm = serviceSearchInput.value.trim();
+      const selectedCategory = categoryFilter.value || "all";
+
+      if (selectedCategory !== "all" && filteredServices.some((service) => service.category === selectedCategory)) {
+        return selectedCategory;
+      }
+
+      if (searchTerm && filteredServices.length) {
+        return filteredServices[0].category;
+      }
+
+      return openCategoryKey && filteredServices.some((service) => service.category === openCategoryKey) ? openCategoryKey : null;
+    }
+
+    function createServiceCategoryGroup(categoryKey, services, language, shouldOpen) {
+      const category = serviceCategories[categoryKey];
+      const group = document.createElement("div");
+      const panelId = `service-panel-${categoryKey}`;
+      group.className = "service-category-group";
+      group.dataset.category = categoryKey;
+      group.style.setProperty("--category-color", category.color);
+
+      const button = document.createElement("button");
+      button.className = "service-category-toggle";
+      button.type = "button";
+      button.setAttribute("aria-expanded", "false");
+      button.setAttribute("aria-controls", panelId);
+      button.innerHTML = `
+        <span class="service-category-icon" aria-hidden="true">${category.icon}</span>
+        <span class="service-category-title">
+          <strong>${getCategoryLabel(categoryKey, language)} (${services.length})</strong>
+          <span>${serviceDescriptions[categoryKey][language] || serviceDescriptions[categoryKey].es}</span>
+        </span>
+        <span class="accordion-arrow" aria-hidden="true">▶</span>
+      `;
+
+      const panel = document.createElement("div");
+      panel.className = "service-category-panel";
+      panel.id = panelId;
+
+      const panelInner = document.createElement("div");
+      panelInner.className = "service-category-panel-inner";
+
+      const cards = document.createElement("div");
+      cards.className = "service-category-cards";
+      cards.replaceChildren(...services.map((service) => createServiceCard(service, language)));
+
+      panelInner.append(cards);
+      panel.append(panelInner);
+      group.append(button, panel);
+
+      if (shouldOpen) {
+        requestAnimationFrame(() => setAccordionPanelState(group, true));
+      }
+
+      return group;
+    }
+
+    function renderServiceCards(language) {
+      const filteredServices = getFilteredServices(language);
+      const categoryToOpen = getCategoryToOpen(filteredServices);
 
       const groups = Object.keys(serviceCategories).map((categoryKey) => {
         const services = filteredServices.filter((service) => service.category === categoryKey);
         if (!services.length) return null;
-
-        const category = serviceCategories[categoryKey];
-        const group = document.createElement("div");
-        group.className = "service-category-group";
-        group.style.setProperty("--category-color", category.color);
-
-        const heading = document.createElement("div");
-        heading.className = "service-category-heading";
-        heading.innerHTML = `
-          <h3>${getCategoryLabel(categoryKey, language)}</h3>
-          <p>${serviceDescriptions[categoryKey][language] || serviceDescriptions[categoryKey].es}</p>
-        `;
-
-        const cards = document.createElement("div");
-        cards.className = "service-category-cards";
-        cards.replaceChildren(...services.map((service) => createServiceCard(service, language)));
-
-        group.append(heading, cards);
-        return group;
+        return createServiceCategoryGroup(categoryKey, services, language, categoryKey === categoryToOpen);
       }).filter(Boolean);
 
       serviceCardsContainer.replaceChildren(...groups);
+      bindAccordionEvents();
+      openCategoryKey = categoryToOpen;
       noServiceResults.classList.toggle("show", filteredServices.length === 0);
     }
 
